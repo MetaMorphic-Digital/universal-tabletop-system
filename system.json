@@ -1,0 +1,51 @@
+{
+  "id": "universal-tabletop-system",
+  "title": "Universal Tabletop System",
+  "description": "The Universal Tabletop System for FoundryVTT, by Metamorphic Digital",
+  "authors": [
+    {
+      "name": "Joseph M.",
+      "discord": "chaosos"
+    }
+  ],
+  "url": "https://gitlab.metamorphic-digital.com/sigil-services/fvtt/metamorphic-digital-studio/universal-tabletop-system",
+  "license": "LICENSE.txt",
+  "readme": "README.md",
+  "bugs": "https://support.metamorphic-digital.com/",
+  "changelog": "CHANGELOG.md",
+  "media": [
+    {
+      "type": "setup",
+      "url": "",
+      "thumbnail": ""
+    }
+  ],
+  "version": "0.8.0",
+  "compatibility": {
+    "minimum": 12,
+    "verified": "12.322"
+  },
+  "esmodules": ["uts.mjs"],
+  "styles": ["uts.css"],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "packs": [],
+  "packFolders": [],
+  "socket": false,
+  "manifest": "Replace this with a link to the /latest release system.json so people can receive updates after they've installed the system",
+  "download": "This must link to a .zip file of the current version",
+  "background": "",
+  "grid": {
+    "type": 1,
+    "distance": 1,
+    "units": "in",
+    "diagonals": 0
+  },
+  "primaryTokenAttribute": "value",
+  "secondaryTokenAttribute": ""
+}
