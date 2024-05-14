@@ -10,4 +10,6 @@ Hooks.once("init", () => {
   for (const docCls of Object.values(documents)) {
     CONFIG[docCls.documentName].documentClass = docCls;
   }
+
+  CONFIG.ActiveEffect.legacyTransferral = false;
 });
