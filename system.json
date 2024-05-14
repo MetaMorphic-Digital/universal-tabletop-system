@@ -47,5 +47,13 @@
     "diagonals": 0
   },
   "primaryTokenAttribute": "value",
-  "secondaryTokenAttribute": ""
+  "secondaryTokenAttribute": "",
+  "documentTypes": {
+    "Actor": {
+      "chess": {}
+    },
+    "Item": {},
+    "Card": {},
+    "Cards": {}
+  }
 }
