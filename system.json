@@ -8,10 +8,10 @@
       "discord": "chaosos"
     }
   ],
-  "url": "https://gitlab.metamorphic-digital.com/sigil-services/fvtt/metamorphic-digital-studio/universal-tabletop-system",
+  "url": "https://github.com/MetaMorphic-Digital/universal-tabletop-system",
   "license": "LICENSE.txt",
   "readme": "README.md",
-  "bugs": "https://support.metamorphic-digital.com/",
+  "bugs": "https://github.com/MetaMorphic-Digital/universal-tabletop-system/issues",
   "changelog": "CHANGELOG.md",
   "media": [
     {
