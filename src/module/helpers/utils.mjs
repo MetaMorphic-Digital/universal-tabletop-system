@@ -7,7 +7,7 @@ export function localizeHelper(object) {
     // const type = foundry.utils.getType(value)
     switch (typeof value) {
       case "object":
-        if (value) _localizeHelper(value);
+        if (value) localizeHelper(value);
         break;
       case "string":
         if (key === "label") object[key] = game.i18n.localize(value);
