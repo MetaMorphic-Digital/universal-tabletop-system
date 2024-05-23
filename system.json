@@ -1,11 +1,15 @@
 {
   "id": "universal-tabletop-system",
   "title": "Universal Tabletop System",
-  "description": "The Universal Tabletop System for FoundryVTT, by Metamorphic Digital",
+  "description": "The Universal Tabletop System for FoundryVTT, by Metamorphic Digital.",
   "authors": [
     {
       "name": "Joseph M.",
       "discord": "chaosos"
+    },
+    {
+      "name": "Zhell",
+      "discord": "zhell9201"
     }
   ],
   "url": "https://github.com/MetaMorphic-Digital/universal-tabletop-system",
@@ -20,7 +24,7 @@
       "thumbnail": ""
     }
   ],
-  "version": "0.8.0",
+  "version": "AUTOMATIC",
   "compatibility": {
     "minimum": 12,
     "verified": "12.322"
@@ -36,9 +40,9 @@
   ],
   "packs": [],
   "packFolders": [],
-  "socket": false,
-  "manifest": "Replace this with a link to the /latest release system.json so people can receive updates after they've installed the system",
-  "download": "This must link to a .zip file of the current version",
+  "socket": true,
+  "manifest": "https://github.com/MetaMorphic-Digital/universal-tabletop-system/releases/latest/download/system.json",
+  "download": "AUTOMATIC",
   "background": "",
   "grid": {
     "type": 1,
