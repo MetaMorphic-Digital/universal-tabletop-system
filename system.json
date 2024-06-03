@@ -27,7 +27,7 @@
   "version": "AUTOMATIC",
   "compatibility": {
     "minimum": 12,
-    "verified": "12.322"
+    "verified": "12.325"
   },
   "esmodules": ["uts.mjs"],
   "styles": ["uts.css"],
