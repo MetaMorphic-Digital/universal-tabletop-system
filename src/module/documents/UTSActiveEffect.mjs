@@ -1,4 +1,4 @@
-export default class UTSActor extends Actor {
+export default class UTSActiveEffect extends ActiveEffect {
   /** @override */
   prepareDerivedData() {
     super.prepareDerivedData();
@@ -6,6 +6,6 @@ export default class UTSActor extends Actor {
     /**
      * Flexible hook for modules to alter derived document data
      */
-    Hooks.callAll("UTS.prepareActorData", this);
+    Hooks.callAll("UTS.prepareActiveEffectData", this);
   }
 }
