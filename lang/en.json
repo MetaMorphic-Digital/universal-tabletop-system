@@ -9,6 +9,16 @@
         "Q": "Queen",
         "K": "King"
       }
+    },
+    "Tabs": {
+      "Properties": "Properties",
+      "Items": "Items",
+      "Effects": "Effects"
+    },
+    "Effect": {
+      "Inactive": "Inactive",
+      "Passive": "Passive",
+      "Temporary": "Temporary"
     }
   },
   "TYPES": {
