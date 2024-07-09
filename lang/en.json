@@ -24,7 +24,8 @@
     "Effect": {
       "Inactive": "Inactive",
       "Passive": "Passive",
-      "Temporary": "Temporary"
+      "Temporary": "Temporary",
+      "Toggle": "Toggle Effect"
     }
   },
   "TYPES": {

@@ -1,4 +1,5 @@
-<div class="tab {{tab.cssClass}}" data-group="primary" data-tab="properties">
+{{! Properties Tab }}
+<section class="tab {{tab.cssClass}}" data-group="primary" data-tab="properties">
   {{#each fields as |field|}}
   {{#if field.fieldset}}
   <fieldset>
@@ -11,4 +12,4 @@
   {{formField outer.field value=outer.value localize=true}}
   {{/if}}
   {{/each}}
-</div>
+</section>
