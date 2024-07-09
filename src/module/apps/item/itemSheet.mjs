@@ -41,11 +41,12 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
       template: "templates/generic/tab-navigation.hbs",
     },
     properties: {
-      // Foundry-provided generic template
-      template: "templates/generic/form-fields.hbs",
+      template: "systems/universal-tabletop-system/templates/shared/properties.hbs",
+      scrollable: "",
     },
     effects: {
       template: "systems/universal-tabletop-system/templates/shared/effects.hbs",
+      scrollable: "",
     },
   };
 
@@ -102,7 +103,7 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
         id: "",
         icon: "",
         // Run through localization
-        label: "UTS.Tabs.",
+        label: "UTS.Sheets.Tabs.",
       };
       switch (partId) {
         case "header":
@@ -185,11 +186,9 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
    * @protected
    */
   static async _onEditImage(event, target) {
-    const attr = target.dataset.edit;
-    const current = foundry.utils.getProperty(this.document, attr);
     const { img } = this.document.constructor.getDefaultArtwork?.(this.document.toObject()) ?? {};
     const fp = new FilePicker({
-      current,
+      current: this.document.img,
       type: "image",
       redirectToRoot: img ? [img] : [],
       callback: (path) => {

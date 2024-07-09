@@ -24,8 +24,8 @@ Hooks.once("init", () => {
   // Necessary until foundry makes this default behavior in v13
   CONFIG.ActiveEffect.legacyTransferral = false;
 
-  Actors.registerSheet("uts", apps.Actor.UTSActorSheet, { makeDefault: true });
-  Items.registerSheet("uts", apps.Item.UTSItemSheet, { makeDefault: true });
+  Actors.registerSheet("uts", apps.Actor.UTSActorSheet, { makeDefault: true, label: "UTS.Sheets.Labels.ActorSheet" });
+  Items.registerSheet("uts", apps.Item.UTSItemSheet, { makeDefault: true, label: "UTS.Sheets.Labels.ActorSheet" });
 });
 
 Hooks.once("i18nInit", () => {

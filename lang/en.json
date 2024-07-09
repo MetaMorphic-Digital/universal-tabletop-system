@@ -10,10 +10,16 @@
         "K": "King"
       }
     },
-    "Tabs": {
-      "Properties": "Properties",
-      "Items": "Items",
-      "Effects": "Effects"
+    "Sheets": {
+      "Labels": {
+        "ActorSheet": "Default UTS Actor Sheet",
+        "ItemSheet": "Default UTS Item Sheet"
+      },
+      "Tabs": {
+        "Properties": "Properties",
+        "Items": "Items",
+        "Effects": "Effects"
+      }
     },
     "Effect": {
       "Inactive": "Inactive",
