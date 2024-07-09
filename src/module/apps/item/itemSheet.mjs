@@ -56,13 +56,13 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
   async _prepareContext(options) {
     const context = {
       editable: this.isEditable,
-      owner: this.isOwner,
+      owner: this.document.isOwner,
       limited: this.document.limited,
       item: this.item,
       system: this.item.system,
       flags: this.item.flags,
       itemFields: this.item.schema.fields,
-      config: CONFIG.UTS,
+      config: CONFIG,
       tabs: this._getTabs(options.parts),
     };
 

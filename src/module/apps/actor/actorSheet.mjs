@@ -62,13 +62,13 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
   async _prepareContext(options) {
     const context = {
       editable: this.isEditable,
-      owner: this.isOwner,
+      owner: this.document.isOwner,
       limited: this.document.limited,
       actor: this.actor,
       system: this.actor.system,
       flags: this.actor.flags,
       actorFields: this.actor.schema.fields,
-      config: CONFIG.UTS,
+      config: CONFIG,
       tabs: this._getTabs(options.parts),
     };
 
@@ -87,6 +87,7 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
         context.tab = context.tabs[partId];
         break;
       case "items":
+        context.itemTypes = this._getItems();
         context.tab = context.tabs[partId];
         break;
     }
@@ -168,6 +169,19 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
         fieldset.fields.push({ field, value: foundry.utils.getProperty(source, path) });
       }
     }
+  }
+
+  /**
+   * Adapted from Actor#itemTypes
+   */
+  _getItems() {
+    const types = Object.fromEntries(
+      game.documentTypes.Item.map((t) => [t, { label: game.i18n.localize(CONFIG.Item.typeLabels[t]), items: [] }])
+    );
+    for (const item of this.actor.items.values()) {
+      types[item.type].items.push(item);
+    }
+    return types;
   }
 
   /**
