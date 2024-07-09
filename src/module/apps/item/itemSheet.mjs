@@ -77,7 +77,7 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
         context.tab = context.tabs[partId];
         break;
       case "properties":
-        context.fields = this._getFields();
+        context.fields = await this._getFields();
         context.tab = context.tabs[partId];
         break;
     }
@@ -122,19 +122,21 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
       return tabs;
     }, {});
   }
+
   /**
    * Handles the system fields for the form-fields generic
    */
-  _getFields() {
+  async _getFields() {
     const doc = this.item;
     const source = doc._source;
     const systemFields = CONFIG.Item.dataModels[doc.type]?.schema.fields;
     const fieldSets = [];
+    // TODO: Find a clever way to handle enrichment
     for (const field of Object.values(systemFields ?? {})) {
       const path = `system.${field.name}`;
       if (field instanceof foundry.data.fields.SchemaField) {
         const fieldset = { fieldset: true, legend: field.label, fields: [] };
-        this.#addSystemFields(fieldset, field.fields, source, path);
+        await this.#addSystemFields(fieldset, field.fields, source, path);
       } else {
         fieldSets.push({ outer: { field, value: foundry.utils.getProperty(source, path) } });
       }
@@ -145,7 +147,7 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
   /**
    * Recursively add system model fields to the fieldset.
    */
-  #addSystemFields(fieldset, schema, source, _path = "system") {
+  async #addSystemFields(fieldset, schema, source, _path = "system") {
     for (const field of Object.values(schema)) {
       const path = `${_path}.${field.name}`;
       if (field instanceof foundry.data.fields.SchemaField) {

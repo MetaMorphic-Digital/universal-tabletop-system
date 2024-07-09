@@ -75,14 +75,13 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
 
   /** @override */
   async _preparePartContext(partId, context) {
-    // TODO: Come up with clever way to automatically handle enriching HTML fields
     switch (partId) {
       case "effects":
         context.effects = prepareActiveEffectCategories(this.actor.allApplicableEffects());
         context.tab = context.tabs[partId];
         break;
       case "properties":
-        context.fields = this._getFields();
+        context.fields = await this._getFields();
         context.tab = context.tabs[partId];
         break;
       case "items":
@@ -137,16 +136,17 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
   /**
    * Handles the system fields for the form-fields generic
    */
-  _getFields() {
+  async _getFields() {
     const doc = this.actor;
     const source = doc._source;
     const systemFields = CONFIG.Actor.dataModels[doc.type]?.schema.fields;
     const fieldSets = [];
+    // TODO: Find a clever way to handle enrichment
     for (const field of Object.values(systemFields ?? {})) {
       const path = `system.${field.name}`;
       if (field instanceof foundry.data.fields.SchemaField) {
         const fieldset = { fieldset: true, legend: field.label, fields: [] };
-        this.#addSystemFields(fieldset, field.fields, source, path);
+        await this.#addSystemFields(fieldset, field.fields, source, path);
       } else {
         fieldSets.push({ outer: { field, value: foundry.utils.getProperty(source, path) } });
       }
@@ -157,7 +157,7 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
   /**
    * Recursively add system model fields to the fieldset.
    */
-  #addSystemFields(fieldset, schema, source, _path = "system") {
+  async #addSystemFields(fieldset, schema, source, _path = "system") {
     for (const field of Object.values(schema)) {
       const path = `${_path}.${field.name}`;
       if (field instanceof foundry.data.fields.SchemaField) {
