@@ -4,11 +4,13 @@ export default class UTSSocketHandler {
     this.registerSocketHandlers();
   }
 
+  /* -------------------------------------------------- */
+
   /**
    * Sets up socket reception
    */
   registerSocketHandlers() {
-    game.socket.on(this.identifier, ({ type, payload }) => {
+    game.socket.on(this.identifier, ({type, payload}) => {
       switch (type) {
         default:
           throw new Error("Unknown type");
@@ -16,12 +18,14 @@ export default class UTSSocketHandler {
     });
   }
 
+  /* -------------------------------------------------- */
+
   /**
    * Emits a socket message to all other connected clients
    * @param {string} type
    * @param {object} payload
    */
   emit(type, payload) {
-    return game.socket.emit(this.identifier, { type, payload });
+    game.socket.emit(this.identifier, {type, payload});
   }
 }

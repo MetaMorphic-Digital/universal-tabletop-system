@@ -4,7 +4,8 @@ export default class UTSCards extends Cards {
     super.prepareDerivedData();
 
     /**
-     * Flexible hook for modules to alter derived document data
+     * Flexible hook for modules to alter derived document data.
+     * @param {UTSCards} cards      The cards preparing derived data.
      */
     Hooks.callAll("UTS.prepareCardsData", this);
   }

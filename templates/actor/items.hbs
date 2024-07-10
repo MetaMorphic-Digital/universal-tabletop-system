@@ -1,0 +1,47 @@
+{{! Items Tab }}
+<section class="tab scrollable {{tab.cssClass}}" data-group="primary" data-tab="items">
+  <ul class="itemTypes">
+    {{#each itemTypes as |group type|}}
+      <li class="itemHeader flexrow">
+        <div class="type-label">
+          {{group.label}}
+        </div>
+        <div class="document-controls">
+          {{#if @root.editable}}
+          <a class="item-control item-create"
+            title="{{localize 'DOCUMENT.Create' type=group.label}}"
+            data-action="createDoc"
+            data-document-class="Item"
+            data-type="{{type}}"
+          >
+            <i class="fas fa-plus"></i>
+            {{localize "DOCUMENT.New" type=group.label}}
+          </a>
+          {{/if}}
+        </div>
+      </li>
+      <ul class="items">
+        {{#each group.items as |item|}}
+          <li class="item flexrow" data-item-id="{{item._id}}" data-drag="true" data-document-class="Item">
+            <img src="{{item.img}}" title="{{item.name}}" width="24" height="24">
+            <div class="item-name">{{item.name}}</div>
+            <div class="document-controls">
+              <a class="item-control item-edit"
+                title="{{localize 'DOCUMENT.Update' type=item.name}}"
+                data-action="viewDoc">
+                <i class="fas fa-edit"></i>
+              </a>
+              {{#if @root.editable}}
+              <a class="item-control item-delete"
+                title="{{localize 'DOCUMENT.Delete' type=item.name}}"
+                data-action="deleteDoc">
+                <i class="fas fa-trash"></i>
+              </a>
+              {{/if}}
+            </div>
+          </li>
+        {{/each}}
+      </ul>
+    {{/each}}
+  </ul>
+</section>

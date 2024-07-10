@@ -8,7 +8,30 @@
         "R": "Rook",
         "Q": "Queen",
         "K": "King"
+      },
+      "FIELDS": {
+        "piece": {
+          "label": "Piece"
+        }
       }
+    },
+    "Sheets": {
+      "Labels": {
+        "ActorSheet": "Default UTS Actor Sheet",
+        "ItemSheet": "Default UTS Item Sheet"
+      },
+      "Tabs": {
+        "Properties": "Properties",
+        "Items": "Items",
+        "Effects": "Effects"
+      }
+    },
+    "Effect": {
+      "Label": "Effect",
+      "Inactive": "Inactive",
+      "Passive": "Passive",
+      "Temporary": "Temporary",
+      "Toggle": "Toggle Effect"
     }
   },
   "TYPES": {
