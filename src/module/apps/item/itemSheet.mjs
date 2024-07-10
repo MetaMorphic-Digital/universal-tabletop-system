@@ -138,6 +138,7 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
       if (field instanceof foundry.data.fields.SchemaField) {
         const fieldset = { fieldset: true, legend: field.label, fields: [] };
         await this.#addSystemFields(fieldset, field.fields, source, path);
+        fieldSets.push(fieldset);
       } else {
         fieldSets.push({ outer: { field, value: foundry.utils.getProperty(source, path) } });
       }

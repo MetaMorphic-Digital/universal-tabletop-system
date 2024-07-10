@@ -3,8 +3,6 @@
   <ul>
     {{#each itemTypes as |group type|}}
       <li>
-        {{log group}}
-        {{log type}}
         <div class="type-label">
           {{group.label}}
         </div>
@@ -28,7 +26,6 @@
             <img src="{{item.img}}" title="{{item.name}}" width="24" height="24" />
             <div class="item-name">{{item.name}}</div>
             <div class="document-controls">
-              {{log ../label}}
               <a class='item-control item-edit'
                 title='{{localize "DOCUMENT.Update" type=../label}}'
                 data-action='viewDoc'>
