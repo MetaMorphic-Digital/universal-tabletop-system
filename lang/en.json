@@ -8,6 +8,11 @@
         "R": "Rook",
         "Q": "Queen",
         "K": "King"
+      },
+      "FIELDS": {
+        "piece": {
+          "label": "Piece"
+        }
       }
     },
     "Sheets": {

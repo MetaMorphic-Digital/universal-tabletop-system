@@ -3,6 +3,8 @@ export default class ChessData extends foundry.abstract.TypeDataModel {
     type: "chess",
   });
 
+  static LOCALIZATION_PREFIXES = ["UTS.Chess"];
+
   static defineSchema() {
     const fields = foundry.data.fields;
 
