@@ -9,4 +9,30 @@
       font-size: 2rem;
     }
   }
+  .tab[data-tab="items"] {
+    ul {
+      list-style: none;
+      padding-left: 5px;
+    }
+    .itemHeader {
+      border-bottom: 1px solid var(--color-border-light-primary);
+      .type-label {
+        font-size: 20px;
+      }
+      .document-controls {
+        flex: 0 0 100px;
+      }
+    }
+    .item {
+      img {
+        border: none;
+        flex: 0 0 30px;
+        padding-right: 5px;
+      }
+      .document-controls {
+        flex: 0 0 50px;
+      }
+    }
+  }
 }
+

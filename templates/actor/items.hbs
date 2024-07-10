@@ -1,8 +1,8 @@
 {{! Items Tab }}
 <section class="tab {{tab.cssClass}}" data-group="primary" data-tab="items">
-  <ul>
+  <ul class="itemTypes">
     {{#each itemTypes as |group type|}}
-      <li>
+      <li class="itemHeader flexrow">
         <div class="type-label">
           {{group.label}}
         </div>
@@ -20,20 +20,20 @@
           {{/if}}
         </div>
       </li>
-      <ul>
+      <ul class="items">
         {{#each group.items as |item|}}
-          <li  data-item-id="{{item._id}}" data-drag="true" data-document-class="Item">
+          <li class="item flexrow" data-item-id="{{item._id}}" data-drag="true" data-document-class="Item">
             <img src="{{item.img}}" title="{{item.name}}" width="24" height="24" />
             <div class="item-name">{{item.name}}</div>
             <div class="document-controls">
               <a class='item-control item-edit'
-                title='{{localize "DOCUMENT.Update" type=../label}}'
+                title='{{localize "DOCUMENT.Update" type=item.name}}'
                 data-action='viewDoc'>
                 <i class='fas fa-edit'></i>
               </a>
               {{#if @root.editable}}
               <a class='item-control item-delete'
-                title='{{localize "DOCUMENT.Delete" type=../label}}'
+                title='{{localize "DOCUMENT.Delete" type=item.name}}'
                 data-action='deleteDoc'>
                 <i class='fas fa-trash'></i>
               </a>

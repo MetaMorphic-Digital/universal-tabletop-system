@@ -182,6 +182,8 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
     for (const item of this.actor.items.values()) {
       types[item.type].items.push(item);
     }
+    // Only show Base if it's actually being used
+    if (types["base"].items.length === 0) delete types["base"];
     return types;
   }
 
