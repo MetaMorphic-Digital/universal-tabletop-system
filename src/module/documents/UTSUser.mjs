@@ -4,7 +4,8 @@ export default class UTSUser extends User {
     super.prepareDerivedData();
 
     /**
-     * Flexible hook for modules to alter derived document data
+     * Flexible hook for modules to alter derived document data.
+     * @param {UTSUser} user      The user preparing derived data.
      */
     Hooks.callAll("UTS.prepareUserData", this);
   }

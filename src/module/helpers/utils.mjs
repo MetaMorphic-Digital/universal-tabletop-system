@@ -15,6 +15,9 @@ export function localizeHelper(object) {
     }
   }
 }
+
+/* -------------------------------------------------- */
+
 /**
  * Prepare the data structure for Active Effects which are currently embedded in an Actor or Item.
  * @param {ActiveEffect[]} effects    A collection or generator of Active Effect documents to prepare sheet data for
@@ -25,18 +28,18 @@ export function prepareActiveEffectCategories(effects) {
     temporary: {
       type: "temporary",
       label: game.i18n.localize("UTS.Effect.Temporary"),
-      effects: [],
+      effects: []
     },
     passive: {
       type: "passive",
       label: game.i18n.localize("UTS.Effect.Passive"),
-      effects: [],
+      effects: []
     },
     inactive: {
       type: "inactive",
       label: game.i18n.localize("UTS.Effect.Inactive"),
-      effects: [],
-    },
+      effects: []
+    }
   };
 
   // Iterate over active effects, classifying them into categories

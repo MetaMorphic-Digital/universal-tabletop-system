@@ -1,6 +1,6 @@
-import { prepareActiveEffectCategories } from "../../helpers/utils.mjs";
+import {prepareActiveEffectCategories} from "../../helpers/utils.mjs";
 
-const { api, sheets } = foundry.applications;
+const {api, sheets} = foundry.applications;
 
 /**
  * Extend the basic ItemSheet with some very simple modifications
@@ -12,10 +12,12 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
     this.#dragDrop = this.#createDragDropHandlers();
   }
 
+  /* -------------------------------------------------- */
+
   /** @override */
   static DEFAULT_OPTIONS = {
     position: {
-      width: 600,
+      width: 600
     },
     classes: ["uts", "item"],
     actions: {
@@ -23,37 +25,37 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
       viewDoc: this._viewEffect,
       createDoc: this._createEffect,
       deleteDoc: this._deleteEffect,
-      toggleEffect: this._toggleEffect,
+      toggleEffect: this._toggleEffect
     },
     form: {
-      submitOnChange: true,
+      submitOnChange: true
     },
     // Custom property that's merged into `this.options`
-    dragDrop: [{ dragSelector: "[data-drag]", dropSelector: null }],
+    dragDrop: [{dragSelector: "[data-drag]", dropSelector: null}]
   };
 
-  /* -------------------------------------------- */
+  /* -------------------------------------------------- */
 
   /** @override */
   static PARTS = {
     header: {
-      template: "systems/universal-tabletop-system/templates/item/header.hbs",
+      template: "systems/universal-tabletop-system/templates/item/header.hbs"
     },
     tabs: {
       // Foundry-provided generic template
-      template: "templates/generic/tab-navigation.hbs",
+      template: "templates/generic/tab-navigation.hbs"
     },
     properties: {
       template: "systems/universal-tabletop-system/templates/shared/properties.hbs",
-      scrollable: "",
+      scrollable: [""]
     },
     effects: {
       template: "systems/universal-tabletop-system/templates/shared/effects.hbs",
-      scrollable: "",
-    },
+      scrollable: [""]
+    }
   };
 
-  /* -------------------------------------------- */
+  /* -------------------------------------------------- */
 
   /** @override */
   async _prepareContext(options) {
@@ -68,11 +70,13 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
       flags: this.item.flags,
       itemFields: this.item.schema.fields,
       config: CONFIG,
-      tabs: this._getTabs(options.parts),
+      tabs: this._getTabs(options.parts)
     };
 
     return context;
   }
+
+  /* -------------------------------------------------- */
 
   /** @override */
   async _preparePartContext(partId, context) {
@@ -89,6 +93,8 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
     }
     return context;
   }
+
+  /* -------------------------------------------------- */
 
   /**
    * Generates the data for the generic tab navigation template
@@ -108,7 +114,7 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
         id: "",
         icon: "",
         // Run through localization
-        label: "UTS.Sheets.Tabs.",
+        label: "UTS.Sheets.Tabs."
       };
       switch (partId) {
         case "header":
@@ -129,6 +135,8 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
     }, {});
   }
 
+  /* -------------------------------------------------- */
+
   /**
    * Handles the system fields for the form-fields generic
    */
@@ -141,15 +149,17 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
     for (const field of Object.values(systemFields ?? {})) {
       const path = `system.${field.name}`;
       if (field instanceof foundry.data.fields.SchemaField) {
-        const fieldset = { fieldset: true, legend: field.label, fields: [] };
+        const fieldset = {fieldset: true, legend: field.label, fields: []};
         await this.#addSystemFields(fieldset, field.fields, source, path);
         fieldSets.push(fieldset);
       } else {
-        fieldSets.push({ outer: { field, value: foundry.utils.getProperty(source, path) } });
+        fieldSets.push({outer: {field, value: foundry.utils.getProperty(source, path)}});
       }
     }
     return fieldSets;
   }
+
+  /* -------------------------------------------------- */
 
   /**
    * Recursively add system model fields to the fieldset.
@@ -160,10 +170,12 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
       if (field instanceof foundry.data.fields.SchemaField) {
         this.#addSystemFields(fieldset, field.fields, source, path);
       } else if (field.constructor.hasFormSupport) {
-        fieldset.fields.push({ field, value: foundry.utils.getProperty(source, path) });
+        fieldset.fields.push({field, value: foundry.utils.getProperty(source, path)});
       }
     }
   }
+
+  /* -------------------------------------------------- */
 
   /**
    * Actions performed after any render of the Application.
@@ -176,11 +188,9 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
     this.#dragDrop.forEach((d) => d.bind(this.element));
   }
 
-  /**************
-   *
-   *   ACTIONS
-   *
-   **************/
+  /* -------------------------------------------------- */
+  /*   Event handlers                                   */
+  /* -------------------------------------------------- */
 
   /**
    * Handle changing a Document's image.
@@ -192,17 +202,19 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
    * @protected
    */
   static async _onEditImage(event, target) {
-    const { img } = this.document.constructor.getDefaultArtwork?.(this.document.toObject()) ?? {};
+    const {img} = this.document.constructor.getDefaultArtwork?.(this.document.toObject()) ?? {};
     const fp = new FilePicker({
       current: this.document.img,
       type: "image",
       redirectToRoot: img ? [img] : [],
-      callback: (path) => this.document.update({ img: path }),
+      callback: (path) => this.document.update({img: path}),
       top: this.position.top + 40,
-      left: this.position.left + 10,
+      left: this.position.left + 10
     });
     return fp.browse();
   }
+
+  /* -------------------------------------------------- */
 
   /**
    * Renders an embedded document's sheet
@@ -217,6 +229,8 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
     effect.sheet.render(true);
   }
 
+  /* -------------------------------------------------- */
+
   /**
    * Handles item deletion
    *
@@ -227,8 +241,10 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
    */
   static async _deleteEffect(event, target) {
     const effect = this._getEffect(target);
-    await effect.delete();
+    effect.delete();
   }
+
+  /* -------------------------------------------------- */
 
   /**
    * Handle creating a new Owned Item or ActiveEffect for the actor using initial data defined in the HTML dataset
@@ -243,16 +259,18 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
     const effectData = {
       name: aeCls.defaultName({
         type: target.dataset.type,
-        parent: this.item,
-      }),
+        parent: this.item
+      })
     };
     for (const [dataKey, value] of Object.entries(target.dataset)) {
       if (["action", "documentClass"].includes(dataKey)) continue;
       foundry.utils.setProperty(effectData, dataKey, value);
     }
 
-    await aeCls.create(effectData, { parent: this.item });
+    aeCls.create(effectData, {parent: this.item});
   }
+
+  /* -------------------------------------------------- */
 
   /**
    * Determines effect parent to pass to helper
@@ -264,10 +282,12 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
    */
   static async _toggleEffect(event, target) {
     const effect = this._getEffect(target);
-    await effect.update({ disabled: !effect.disabled });
+    effect.update({disabled: !effect.disabled});
   }
 
-  /** Helper Functions */
+  /* -------------------------------------------------- */
+  /*   Helper functions                                 */
+  /* -------------------------------------------------- */
 
   /**
    * Fetches the row with the data for the rendered embedded document
@@ -280,11 +300,9 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
     return this.item.effects.get(li?.dataset?.effectId);
   }
 
-  /**
-   *
-   * DragDrop
-   *
-   */
+  /* -------------------------------------------------- */
+  /*   Drag and drop                                    */
+  /* -------------------------------------------------- */
 
   /**
    * Define whether a user is able to begin a dragstart workflow for a given drag selector
@@ -296,6 +314,8 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
     return this.isEditable;
   }
 
+  /* -------------------------------------------------- */
+
   /**
    * Define whether a user is able to conclude a drag-and-drop workflow for a given drop selector
    * @param {string} selector       The candidate HTML selector for the drop target
@@ -305,6 +325,8 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
   _canDragDrop(selector) {
     return this.isEditable;
   }
+
+  /* -------------------------------------------------- */
 
   /**
    * Callback actions which occur at the beginning of a drag start workflow.
@@ -327,12 +349,16 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
     event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
   }
 
+  /* -------------------------------------------------- */
+
   /**
    * Callback actions which occur when a dragged element is over a drop target.
    * @param {DragEvent} event       The originating DragEvent
    * @protected
    */
   _onDragOver(event) {}
+
+  /* -------------------------------------------------- */
 
   /**
    * Callback actions which occur when a dragged element is dropped on a target.
@@ -358,7 +384,7 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
     }
   }
 
-  /* -------------------------------------------- */
+  /* -------------------------------------------------- */
 
   /**
    * Handle the dropping of ActiveEffect data onto an Actor Sheet
@@ -373,8 +399,10 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
     if (!this.item.isOwner || !effect) return false;
 
     if (this.item.uuid === effect.parent?.uuid) return this._onEffectSort(event, effect);
-    return aeCls.create(effect, { parent: this.item });
+    aeCls.create(effect, {parent: this.item});
   }
+
+  /* -------------------------------------------------- */
 
   /**
    * Sorts an Active Effect based on its surrounding attributes
@@ -395,13 +423,13 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
     const siblings = [];
     for (let el of dropTarget.parentElement.children) {
       const siblingId = el.dataset.effectId;
-      if (siblingId && siblingId !== effect.id) siblings.push(effects.get(el.dataset.effectId));
+      if (siblingId && (siblingId !== effect.id)) siblings.push(effects.get(el.dataset.effectId));
     }
 
     // Perform the sort
     const sortUpdates = SortingHelpers.performIntegerSort(effect, {
       target,
-      siblings,
+      siblings
     });
     const updateData = sortUpdates.map((u) => {
       const update = u.update;
@@ -410,10 +438,10 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
     });
 
     // Perform the update
-    return this.item.updateEmbeddedDocuments("ActiveEffect", updateData);
+    this.item.updateEmbeddedDocuments("ActiveEffect", updateData);
   }
 
-  /* -------------------------------------------- */
+  /* -------------------------------------------------- */
 
   /**
    * Handle dropping of an Actor data onto another Actor sheet
@@ -427,7 +455,7 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
     if (!this.item.isOwner) return false;
   }
 
-  /* -------------------------------------------- */
+  /* -------------------------------------------------- */
 
   /**
    * Handle dropping of an item reference or item data onto an Actor Sheet
@@ -440,7 +468,7 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
     if (!this.item.isOwner) return false;
   }
 
-  /* -------------------------------------------- */
+  /* -------------------------------------------------- */
 
   /**
    * Handle dropping of a Folder on an Actor Sheet.
@@ -454,7 +482,10 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
     if (!this.item.isOwner) return [];
   }
 
-  /** The following pieces set up drag handling and are unlikely to need modification  */
+  /* -------------------------------------------------- */
+  /*   The following pieces set up drag                 */
+  /*   handling and are unlikely to need modification   */
+  /* -------------------------------------------------- */
 
   /**
    * Returns an array of DragDrop instances
@@ -464,9 +495,13 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
     return this.#dragDrop;
   }
 
+  /* -------------------------------------------------- */
+
   // This is marked as private because there's no real need
   // for subclasses or external hooks to mess with it directly
   #dragDrop;
+
+  /* -------------------------------------------------- */
 
   /**
    * Create drag-and-drop workflow handlers for this Application
@@ -477,12 +512,12 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
     return this.options.dragDrop.map((d) => {
       d.permissions = {
         dragstart: this._canDragStart.bind(this),
-        drop: this._canDragDrop.bind(this),
+        drop: this._canDragDrop.bind(this)
       };
       d.callbacks = {
         dragstart: this._onDragStart.bind(this),
         dragover: this._onDragOver.bind(this),
-        drop: this._onDrop.bind(this),
+        drop: this._onDrop.bind(this)
       };
       return new DragDrop(d);
     });

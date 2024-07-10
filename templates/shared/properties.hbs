@@ -1,15 +1,14 @@
-{{! Properties Tab }}
 <section class="standard-form tab {{tab.cssClass}}" data-group="primary" data-tab="properties">
-  {{#each fields as |field|}}
-  {{#if field.fieldset}}
+  {{#each fields}}
+  {{#if fieldset}}
   <fieldset>
-    <legend>{{localize field.legend}}</legend>
-    {{#each field.fields as |f|}}
-    {{formField f.field value=f.value localize=true}}
+    <legend>{{localize legend}}</legend>
+    {{#each fields}}
+    {{formGroup field value=value localize=true}}
     {{/each}}
   </fieldset>
   {{else}}
-  {{formField outer.field value=outer.value localize=true}}
+  {{formGroup outer.field value=outer.value localize=true}}
   {{/if}}
   {{/each}}
 </section>

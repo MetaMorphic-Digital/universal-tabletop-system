@@ -1,4 +1,6 @@
 .application.sheet.uts {
+  max-height: 90%;
+
   & .sheet-header {
     & img {
       border: none;

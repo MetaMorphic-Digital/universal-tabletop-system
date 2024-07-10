@@ -1,6 +1,6 @@
-import { prepareActiveEffectCategories } from "../../helpers/utils.mjs";
+import {prepareActiveEffectCategories} from "../../helpers/utils.mjs";
 
-const { api, sheets } = foundry.applications;
+const {api, sheets} = foundry.applications;
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -12,51 +12,54 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
     this.#dragDrop = this.#createDragDropHandlers();
   }
 
+  /* -------------------------------------------------- */
+
   /** @override */
   static DEFAULT_OPTIONS = {
     classes: ["uts", "actor"],
     position: {
       width: 600,
-      height: 600,
+      height: 600
     },
     actions: {
       onEditImage: this._onEditImage,
       viewDoc: this._viewDoc,
       createDoc: this._createDoc,
       deleteDoc: this._deleteDoc,
-      toggleEffect: this._toggleEffect,
+      toggleEffect: this._toggleEffect
     },
     // Custom property that's merged into `this.options`
-    dragDrop: [{ dragSelector: "[data-drag]", dropSelector: null }],
+    dragDrop: [{dragSelector: "[data-drag]", dropSelector: null}],
     form: {
-      submitOnChange: true,
-    },
+      submitOnChange: true
+    }
   };
+
+  /* -------------------------------------------------- */
 
   /** @override */
   static PARTS = {
     header: {
-      template: "systems/universal-tabletop-system/templates/actor/header.hbs",
+      template: "systems/universal-tabletop-system/templates/actor/header.hbs"
     },
     tabs: {
-      // Foundry-provided generic template
-      template: "templates/generic/tab-navigation.hbs",
+      template: "templates/generic/tab-navigation.hbs"
     },
     properties: {
       template: "systems/universal-tabletop-system/templates/shared/properties.hbs",
-      scrollable: "",
+      scrollable: [""]
     },
     items: {
       template: "systems/universal-tabletop-system/templates/actor/items.hbs",
-      scrollable: "",
+      scrollable: [""]
     },
     effects: {
       template: "systems/universal-tabletop-system/templates/shared/effects.hbs",
-      scrollable: "",
-    },
+      scrollable: [""]
+    }
   };
 
-  /* -------------------------------------------- */
+  /* -------------------------------------------------- */
 
   /** @override */
   async _prepareContext(options) {
@@ -70,11 +73,13 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
       flags: this.actor.flags,
       actorFields: this.actor.schema.fields,
       config: CONFIG,
-      tabs: this._getTabs(options.parts),
+      tabs: this._getTabs(options.parts)
     };
 
     return context;
   }
+
+  /* -------------------------------------------------- */
 
   /** @override */
   async _preparePartContext(partId, context) {
@@ -95,6 +100,8 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
     return context;
   }
 
+  /* -------------------------------------------------- */
+
   /**
    * Generates the data for the generic tab navigation template
    * @param {string[]} parts An array of named template parts to render
@@ -112,7 +119,7 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
         id: "",
         icon: "",
         // Run through localization
-        label: "UTS.Sheets.Tabs.",
+        label: "UTS.Sheets.Tabs."
       };
       switch (partId) {
         case "header":
@@ -137,8 +144,11 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
     }, {});
   }
 
+  /* -------------------------------------------------- */
+
   /**
    * Handles the system fields for the form-fields generic
+   * @returns {object[]}
    */
   async _getFields() {
     const doc = this.actor;
@@ -149,15 +159,17 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
     for (const field of Object.values(systemFields ?? {})) {
       const path = `system.${field.name}`;
       if (field instanceof foundry.data.fields.SchemaField) {
-        const fieldset = { fieldset: true, legend: field.label, fields: [] };
+        const fieldset = {fieldset: true, legend: field.label, fields: []};
         await this.#addSystemFields(fieldset, field.fields, source, path);
         fieldSets.push(fieldset);
       } else {
-        fieldSets.push({ outer: { field, value: foundry.utils.getProperty(source, path) } });
+        fieldSets.push({outer: {field, value: foundry.utils.getProperty(source, path)}});
       }
     }
     return fieldSets;
   }
+
+  /* -------------------------------------------------- */
 
   /**
    * Recursively add system model fields to the fieldset.
@@ -168,25 +180,29 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
       if (field instanceof foundry.data.fields.SchemaField) {
         this.#addSystemFields(fieldset, field.fields, source, path);
       } else if (field.constructor.hasFormSupport) {
-        fieldset.fields.push({ field, value: foundry.utils.getProperty(source, path) });
+        fieldset.fields.push({field, value: foundry.utils.getProperty(source, path)});
       }
     }
   }
+
+  /* -------------------------------------------------- */
 
   /**
    * Adapted from Actor#itemTypes
    */
   _getItems() {
-    const types = Object.fromEntries(
-      game.documentTypes.Item.map((t) => [t, { label: game.i18n.localize(CONFIG.Item.typeLabels[t]), items: [] }])
-    );
-    for (const item of this.actor.items.values()) {
+    const types = Object.fromEntries(game.documentTypes.Item.map((t) => {
+      return [t, {label: game.i18n.localize(CONFIG.Item.typeLabels[t]), items: []}];
+    }));
+    for (const item of this.actor.items) {
       types[item.type].items.push(item);
     }
     // Only show Base if it's actually being used
-    if (types["base"].items.length === 0) delete types["base"];
+    if (types.base.items.length === 0) delete types.base;
     return types;
   }
+
+  /* -------------------------------------------------- */
 
   /**
    * Actions performed after any render of the Application.
@@ -201,11 +217,9 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
     this.#disableOverrides();
   }
 
-  /**************
-   *
-   *   ACTIONS
-   *
-   **************/
+  /* -------------------------------------------------- */
+  /*   Event handlers                                   */
+  /* -------------------------------------------------- */
 
   /**
    * Handle changing a Document's image.
@@ -217,17 +231,19 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
    * @protected
    */
   static async _onEditImage(event, target) {
-    const { img } = this.document.constructor.getDefaultArtwork?.(this.document.toObject()) ?? {};
+    const {img} = this.document.constructor.getDefaultArtwork?.(this.document.toObject()) ?? {};
     const fp = new FilePicker({
       current: this.document.img,
       type: "image",
       redirectToRoot: img ? [img] : [],
-      callback: (path) => this.document.update({ img: path }),
+      callback: (path) => this.document.update({img: path}),
       top: this.position.top + 40,
-      left: this.position.left + 10,
+      left: this.position.left + 10
     });
     return fp.browse();
   }
+
+  /* -------------------------------------------------- */
 
   /**
    * Renders an embedded document's sheet
@@ -242,6 +258,8 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
     doc.sheet.render(true);
   }
 
+  /* -------------------------------------------------- */
+
   /**
    * Handles item deletion
    *
@@ -252,8 +270,10 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
    */
   static async _deleteDoc(event, target) {
     const doc = this._getEmbeddedDocument(target);
-    await doc.delete();
+    doc.delete();
   }
+
+  /* -------------------------------------------------- */
 
   /**
    * Handle creating a new Owned Item or ActiveEffect for the actor using initial data defined in the HTML dataset
@@ -268,15 +288,17 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
     const docData = {
       name: docCls.defaultName({
         type: target.dataset.type,
-        parent: this.actor,
-      }),
+        parent: this.actor
+      })
     };
     for (const [dataKey, value] of Object.entries(target.dataset)) {
       if (["action", "documentClass"].includes(dataKey)) continue;
       foundry.utils.setProperty(docData, dataKey, value);
     }
-    await docCls.create(docData, { parent: this.actor });
+    docCls.create(docData, {parent: this.actor});
   }
+
+  /* -------------------------------------------------- */
 
   /**
    * Determines effect parent to pass to helper
@@ -288,33 +310,36 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
    */
   static async _toggleEffect(event, target) {
     const effect = this._getEmbeddedDocument(target);
-    await effect.update({ disabled: !effect.disabled });
+    effect.update({disabled: !effect.disabled});
   }
 
-  /** Helper Functions */
+  /* -------------------------------------------------- */
+  /*   Helper functions                                 */
+  /* -------------------------------------------------- */
 
   /**
    * Fetches the embedded document representing the containing HTML element
    *
-   * @param {HTMLElement} target    The element subject to search
-   * @returns {Item | ActiveEffect} The embedded Item or ActiveEffect
+   * @param {HTMLElement} target      The element subject to search
+   * @returns {Item|ActiveEffect}     The embedded Item or ActiveEffect
    */
   _getEmbeddedDocument(target) {
     const docRow = target.closest("li[data-document-class]");
     if (docRow.dataset.documentClass === "Item") {
       return this.actor.items.get(docRow.dataset.itemId);
     } else if (docRow.dataset.documentClass === "ActiveEffect") {
-      const parent =
-        docRow.dataset.parentId === this.actor.id ? this.actor : this.actor.items.get(docRow?.dataset.parentId);
-      return parent.effects.get(docRow?.dataset.effectId);
-    } else return console.warn("Could not find document class");
+      const parent = docRow.dataset.parentId === this.actor.id ?
+        this.actor :
+        this.actor.items.get(docRow?.dataset.parentId);
+      return parent.effects.get(docRow.dataset.effectId);
+    } else {
+      console.warn("Could not find document class");
+    }
   }
 
-  /***************
-   *
-   * Drag and Drop
-   *
-   ***************/
+  /* -------------------------------------------------- */
+  /*   Drag and drop                                    */
+  /* -------------------------------------------------- */
 
   /**
    * Define whether a user is able to begin a dragstart workflow for a given drag selector
@@ -326,6 +351,8 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
     return this.isEditable;
   }
 
+  /* -------------------------------------------------- */
+
   /**
    * Define whether a user is able to conclude a drag-and-drop workflow for a given drop selector
    * @param {string} selector       The candidate HTML selector for the drop target
@@ -335,6 +362,8 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
   _canDragDrop(selector) {
     return this.isEditable;
   }
+
+  /* -------------------------------------------------- */
 
   /**
    * Callback actions which occur at the beginning of a drag start workflow.
@@ -346,13 +375,14 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
     if ("link" in event.target.dataset) return;
 
     // Chained operation
-    let dragData = this._getEmbeddedDocument(docRow)?.toDragData();
-
+    const dragData = this._getEmbeddedDocument(docRow)?.toDragData();
     if (!dragData) return;
 
     // Set data transfer
     event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
   }
+
+  /* -------------------------------------------------- */
 
   /**
    * Callback actions which occur when a dragged element is over a drop target.
@@ -360,6 +390,8 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
    * @protected
    */
   _onDragOver(event) {}
+
+  /* -------------------------------------------------- */
 
   /**
    * Callback actions which occur when a dragged element is dropped on a target.
@@ -385,6 +417,8 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
     }
   }
 
+  /* -------------------------------------------------- */
+
   /**
    * Handle the dropping of ActiveEffect data onto an Actor Sheet
    * @param {DragEvent} event                  The concluding DragEvent which contains drop data
@@ -396,9 +430,11 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
     const aeCls = getDocumentClass("ActiveEffect");
     const effect = await aeCls.fromDropData(data);
     if (!this.actor.isOwner || !effect) return false;
-    if (effect.target === this.actor) return this._onSortActiveEffect(event, effect);
-    return aeCls.create(effect, { parent: this.actor });
+    if (effect.target === this.actor) this._onSortActiveEffect(event, effect);
+    else aeCls.create(effect, {parent: this.actor});
   }
+
+  /* -------------------------------------------------- */
 
   /**
    * Handle a drop event for an existing embedded Active Effect to sort that Active Effect relative to its siblings
@@ -420,14 +456,15 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
     for (const el of dropTarget.parentElement.children) {
       const siblingId = el.dataset.effectId;
       const parentId = el.dataset.parentId;
-      if (siblingId && parentId && (siblingId !== effect.id || parentId !== effect.parent.id))
+      if (siblingId && parentId && ((siblingId !== effect.id) || (parentId !== effect.parent.id))) {
         siblings.push(this._getEmbeddedDocument(el));
+      }
     }
 
     // Perform the sort
     const sortUpdates = SortingHelpers.performIntegerSort(effect, {
       target,
-      siblings,
+      siblings
     });
 
     // Split the updates up by parent document
@@ -435,7 +472,7 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
 
     const grandchildUpdateData = sortUpdates.reduce((items, u) => {
       const parentId = u.target.parent.id;
-      const update = { _id: u.target.id, ...u.update };
+      const update = {_id: u.target.id, ...u.update};
       if (parentId === this.actor.id) {
         directUpdates.push(update);
         return items;
@@ -451,8 +488,10 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
     }
 
     // Update on the main actor
-    return this.actor.updateEmbeddedDocuments("ActiveEffect", directUpdates);
+    this.actor.updateEmbeddedDocuments("ActiveEffect", directUpdates);
   }
+
+  /* -------------------------------------------------- */
 
   /**
    * Handle dropping of an Actor data onto another Actor sheet
@@ -466,7 +505,7 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
     if (!this.actor.isOwner) return false;
   }
 
-  /* -------------------------------------------- */
+  /* -------------------------------------------------- */
 
   /**
    * Handle dropping of an item reference or item data onto an Actor Sheet
@@ -486,6 +525,8 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
     return this._onDropItemCreate(item, event);
   }
 
+  /* -------------------------------------------------- */
+
   /**
    * Handle dropping of a Folder on an Actor Sheet.
    * The core sheet currently supports dropping a Folder of Items to create all items as owned items.
@@ -496,7 +537,7 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
    */
   async _onDropFolder(event, data) {
     if (!this.actor.isOwner) return [];
-    const folder = await Folder.implementation.fromDropData(data);
+    const folder = await getDocumentClass("Folder").fromDropData(data);
     if (folder.type !== "Item") return [];
     const droppedItemData = await Promise.all(
       folder.contents.map(async (item) => {
@@ -506,6 +547,8 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
     );
     return this._onDropItemCreate(droppedItemData, event);
   }
+
+  /* -------------------------------------------------- */
 
   /**
    * Handle the final creation of dropped Item data on the Actor.
@@ -519,6 +562,8 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
     itemData = itemData instanceof Array ? itemData : [itemData];
     return this.actor.createEmbeddedDocuments("Item", itemData);
   }
+
+  /* -------------------------------------------------- */
 
   /**
    * Handle a drop event for an existing embedded Item to sort that Item relative to its siblings
@@ -540,13 +585,13 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
     const siblings = [];
     for (let el of dropTarget.parentElement.children) {
       const siblingId = el.dataset.itemId;
-      if (siblingId && siblingId !== item.id) siblings.push(items.get(el.dataset.itemId));
+      if (siblingId && (siblingId !== item.id)) siblings.push(items.get(el.dataset.itemId));
     }
 
     // Perform the sort
     const sortUpdates = SortingHelpers.performIntegerSort(item, {
       target,
-      siblings,
+      siblings
     });
     const updateData = sortUpdates.map((u) => {
       const update = u.update;
@@ -558,7 +603,10 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
     return this.actor.updateEmbeddedDocuments("Item", updateData);
   }
 
-  /** The following pieces set up drag handling and are unlikely to need modification  */
+  /* -------------------------------------------------- */
+  /*   The following pieces set up drag                 */
+  /*   handling and are unlikely to need modification   */
+  /* -------------------------------------------------- */
 
   /**
    * Returns an array of DragDrop instances
@@ -568,9 +616,13 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
     return this.#dragDrop;
   }
 
+  /* -------------------------------------------------- */
+
   // This is marked as private because there's no real need
   // for subclasses or external hooks to mess with it directly
   #dragDrop;
+
+  /* -------------------------------------------------- */
 
   /**
    * Create drag-and-drop workflow handlers for this Application
@@ -581,22 +633,20 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
     return this.options.dragDrop.map((d) => {
       d.permissions = {
         dragstart: this._canDragStart.bind(this),
-        drop: this._canDragDrop.bind(this),
+        drop: this._canDragDrop.bind(this)
       };
       d.callbacks = {
         dragstart: this._onDragStart.bind(this),
         dragover: this._onDragOver.bind(this),
-        drop: this._onDrop.bind(this),
+        drop: this._onDrop.bind(this)
       };
       return new DragDrop(d);
     });
   }
 
-  /********************
-   *
-   * Actor Override Handling
-   *
-   ********************/
+  /* -------------------------------------------------- */
+  /*   Actor override handling                          */
+  /* -------------------------------------------------- */
 
   /**
    * Submit a document update based on the processed form data.
@@ -609,9 +659,11 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
    */
   async _processSubmitData(event, form, submitData) {
     const overrides = foundry.utils.flattenObject(this.actor.overrides);
-    for (let k of Object.keys(overrides)) delete submitData[k];
-    await this.document.update(submitData);
+    for (const k of Object.keys(overrides)) delete submitData[k];
+    this.document.update(submitData);
   }
+
+  /* -------------------------------------------------- */
 
   /**
    * Disables inputs subject to active effects
@@ -620,9 +672,7 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
     const flatOverrides = foundry.utils.flattenObject(this.actor.overrides);
     for (const override of Object.keys(flatOverrides)) {
       const input = this.element.querySelector(`[name="${override}"]`);
-      if (input) {
-        input.disabled = true;
-      }
+      if (input) input.disabled = true;
     }
   }
 }
