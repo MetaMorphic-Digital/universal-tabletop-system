@@ -1,40 +1,42 @@
 {{! Effects Tab }}
 <section class='tab effects flexcol {{tab.cssClass}}' data-group='primary' data-tab='effects'>
-  <ol class='effects-list'>
+  <ul class='effects-list'>
     {{#each effects as |section sid|}}
     <li class='effects-header flexrow' data-effect-type='{{section.type}}' data-drag="true">
-      <div class='effect-name flexrow'>
+      <div class='effect-label flexrow'>
         {{localize section.label}}
       </div>
       <div class='effect-source'>
         {{localize 'EFFECT.Origin'}}
       </div>
       <div class='effect-source'>{{localize 'EFFECT.TabDuration'}}</div>
-      <div class='effect-controls flexrow'>
-        <a class='effect-control'
+      <div class='document-controls flexrow'>
+        <a class='effect-controls'
           data-action='createDoc' data-document-class='ActiveEffect'
           {{#if (eq section.type "inactive" )}} data-disabled="true"
           {{else if (eq section.type "temporary" )}} data-duration.rounds="1" {{/if}}
-          data-origin="{{@root.actor.uuid}}"
+          data-origin="{{@root.document.uuid}}"
           title='{{localize "DOCUMENT.Create" type=(localize "DOCUMENT.ActiveEffect")}}'
+          data-img="icons/svg/aura.svg"
         >
           <i class='fas fa-plus'></i>
-          {{localize 'DOCUMENT.New' type=(localize "DOCUMENT.ActiveEffect")}}
+          {{localize 'DOCUMENT.New' type=(localize "UTS.Effect.Label")}}
         </a>
       </div>
     </li>
 
-    <ol class='effect-list'>
+    <ul class='effect-list'>
       {{#each section.effects as |effect|}}
-      <li class='effect effect flexrow' data-effect-id='{{effect.id}}' data-parent-id='{{effect.parent.id}}'
+      <li class='effect flexrow' data-effect-id='{{effect.id}}' data-parent-id='{{effect.parent.id}}'
         data-document-class='ActiveEffect' data-drag="true">
-        <div class='effect-name flexrow'>
-          <img class='effect-image' src='{{effect.img}}' />
-          <div>{{effect.name}}</div>
+        {{log effect}}
+        <div class='effect-label flexrow'>
+          <img class='effect-image' src='{{effect.img}}' height="24" width="24" />
+          <div class="effect-name">{{effect.name}}</div>
         </div>
         <div class='effect-source'>{{effect.sourceName}}</div>
         <div class='effect-duration'>{{effect.duration.label}}</div>
-        <div class='effect-controls flexrow'>
+        <div class='document-controls flexrow'>
           {{#if @root.editable}}
           <a class='effect-control' data-action='toggleEffect' title='{{localize "UTS.Effect.Toggle"}}'>
             <i class='fas {{#if effect.disabled}}fa-check{{else}}fa-times{{/if}}'></i>
@@ -51,7 +53,7 @@
         </div>
       </li>
       {{/each}}
-    </ol>
+    </ul>
     {{/each}}
-  </ol>
+  </ul>
 </section>

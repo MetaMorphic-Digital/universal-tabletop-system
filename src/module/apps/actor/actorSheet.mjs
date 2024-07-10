@@ -64,6 +64,7 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
       editable: this.isEditable,
       owner: this.document.isOwner,
       limited: this.document.limited,
+      document: this.document,
       actor: this.actor,
       system: this.actor.system,
       flags: this.actor.flags,
@@ -221,10 +222,7 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
       current: this.document.img,
       type: "image",
       redirectToRoot: img ? [img] : [],
-      callback: (path) => {
-        target.src = path;
-        this.document.update({ img: path });
-      },
+      callback: (path) => this.document.update({ img: path }),
       top: this.position.top + 40,
       left: this.position.left + 10,
     });

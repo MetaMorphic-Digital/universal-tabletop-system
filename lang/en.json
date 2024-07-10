@@ -27,6 +27,7 @@
       }
     },
     "Effect": {
+      "Label": "Effect",
       "Inactive": "Inactive",
       "Passive": "Passive",
       "Temporary": "Temporary",

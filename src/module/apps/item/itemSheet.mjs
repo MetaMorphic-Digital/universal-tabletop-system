@@ -14,6 +14,9 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
 
   /** @override */
   static DEFAULT_OPTIONS = {
+    position: {
+      width: 600,
+    },
     classes: ["uts", "item"],
     actions: {
       onEditImage: this._onEditImage,
@@ -58,7 +61,9 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
       editable: this.isEditable,
       owner: this.document.isOwner,
       limited: this.document.limited,
+      document: this.document,
       item: this.item,
+      actor: this.item.actor,
       system: this.item.system,
       flags: this.item.flags,
       itemFields: this.item.schema.fields,
@@ -192,10 +197,7 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
       current: this.document.img,
       type: "image",
       redirectToRoot: img ? [img] : [],
-      callback: (path) => {
-        target.src = path;
-        this.document.update({ img: path });
-      },
+      callback: (path) => this.document.update({ img: path }),
       top: this.position.top + 40,
       left: this.position.left + 10,
     });
