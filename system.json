@@ -59,5 +59,11 @@
     "Item": {},
     "Card": {},
     "Cards": {}
+  },
+  "flags": {
+    "hotReload": {
+      "extensions": ["css", "html", "hbs", "json"],
+      "paths": ["uts.css", "templates", "lang"]
+    }
   }
 }

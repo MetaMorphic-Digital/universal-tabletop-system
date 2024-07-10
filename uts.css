@@ -1,0 +1,12 @@
+.application.sheet.uts {
+  .sheet-header {
+    img {
+      border: none;
+      flex: 0 0 100px;
+    }
+    input[name="name"] {
+      height: 80%;
+      font-size: 2rem;
+    }
+  }
+}
