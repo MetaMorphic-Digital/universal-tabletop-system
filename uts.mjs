@@ -3,7 +3,7 @@ import UTSSocketHandler from "./src/module/helpers/sockets.mjs";
 import * as apps from "./src/module/apps/index.mjs";
 import * as documents from "./src/module/documents/index.mjs";
 import * as dataModels from "./src/module/data/index.mjs";
-import { localizeHelper } from "./src/module/helpers/utils.mjs";
+import {localizeHelper} from "./src/module/helpers/utils.mjs";
 
 Hooks.once("init", () => {
   CONFIG.UTS = UTS;
@@ -24,8 +24,8 @@ Hooks.once("init", () => {
   // Necessary until foundry makes this default behavior in v13
   CONFIG.ActiveEffect.legacyTransferral = false;
 
-  Actors.registerSheet("uts", apps.Actor.UTSActorSheet, { makeDefault: true, label: "UTS.Sheets.Labels.ActorSheet" });
-  Items.registerSheet("uts", apps.Item.UTSItemSheet, { makeDefault: true, label: "UTS.Sheets.Labels.ActorSheet" });
+  Actors.registerSheet("uts", apps.Actor.UTSActorSheet, {makeDefault: true, label: "UTS.Sheets.Labels.ActorSheet"});
+  Items.registerSheet("uts", apps.Item.UTSItemSheet, {makeDefault: true, label: "UTS.Sheets.Labels.ActorSheet"});
 });
 
 Hooks.once("i18nInit", () => {
