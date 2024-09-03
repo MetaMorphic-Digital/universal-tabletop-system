@@ -1,4 +1,5 @@
 import {systemPath} from "../constants.mjs";
+import Player from "../data/combatant/player.mjs";
 
 export default class UTSCombat extends Combat {
   /** @override */
@@ -74,5 +75,28 @@ export default class UTSCombat extends Combat {
       rejectClose: false,
       options
     });
+  }
+
+  /**
+   * Adds a player combatant to the current combat
+   */
+  async addPlayer() {
+    const data = {
+      type: "player",
+      system: {}
+    };
+    data.system.user = await foundry.applications.api.DialogV2.prompt({
+      window: {title: game.i18n.localize("UTS.Combat.AddPlayerCombatTracker")},
+      content: Player.schema.getField("user").toFormGroup().outerHTML,
+      rejectClose: true,
+      ok: {
+        callback: (event, button, dialog) => button.form.elements["system.user"].value
+      }
+    });
+    const user = game.users.get(data.system.user);
+    if (!user) return;
+    data.name = user.name;
+    data.img = user.avatar;
+    await this.createEmbeddedDocuments("Combatant", [data]);
   }
 }

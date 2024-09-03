@@ -26,6 +26,17 @@
         "Effects": "Effects"
       }
     },
+    "Combat": {
+      "AddPlayer": "Add Player",
+      "AddPlayerCombatTracker": "Add Player to Combat Tracker",
+      "player": {
+        "FIELDS": {
+          "user": {
+            "label": "Player"
+          }
+        }
+      }
+    },
     "Effect": {
       "Label": "Effect",
       "Inactive": "Inactive",
