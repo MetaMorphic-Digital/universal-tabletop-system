@@ -24,8 +24,12 @@ Hooks.once("init", () => {
   // Necessary until foundry makes this default behavior in v13
   CONFIG.ActiveEffect.legacyTransferral = false;
 
+  // Document Sheets
   Actors.registerSheet("uts", apps.Actor.UTSActorSheet, {makeDefault: true, label: "UTS.Sheets.Labels.ActorSheet"});
   Items.registerSheet("uts", apps.Item.UTSItemSheet, {makeDefault: true, label: "UTS.Sheets.Labels.ActorSheet"});
+
+  // Sidebar tabs
+  CONFIG.ui.combat = apps.Combat.UTSCombatTracker;
 });
 
 Hooks.once("i18nInit", () => {
