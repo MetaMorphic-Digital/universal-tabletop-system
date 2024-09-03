@@ -58,7 +58,10 @@
     },
     "Item": {},
     "Card": {},
-    "Cards": {}
+    "Cards": {},
+    "Combat": {
+      "player": {}
+    }
   },
   "flags": {
     "hotReload": {
