@@ -37,6 +37,9 @@
   "TYPES": {
     "Actor": {
       "chess": "Chess Piece"
+    },
+    "Combat": {
+      "player": "Player Turns"
     }
   }
 }
