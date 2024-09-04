@@ -44,6 +44,7 @@
   "manifest": "https://github.com/MetaMorphic-Digital/universal-tabletop-system/releases/latest/download/system.json",
   "download": "AUTOMATIC",
   "background": "",
+  "initiative": "1d20",
   "grid": {
     "type": 1,
     "distance": 1,
@@ -59,9 +60,7 @@
     "Item": {},
     "Card": {},
     "Cards": {},
-    "Combat": {
-      "player": {}
-    },
+    "Combat": {},
     "Combatant": {
       "player": {}
     }
