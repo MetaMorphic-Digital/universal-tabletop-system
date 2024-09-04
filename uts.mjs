@@ -36,3 +36,5 @@ Hooks.once("i18nInit", () => {
   // Localizing the system's CONFIG object
   localizeHelper(CONFIG.UTS);
 });
+
+Hooks.on("renderCombatantConfig", apps.Combatant.hooks.renderCombatantConfig);
