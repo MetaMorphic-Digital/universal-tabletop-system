@@ -15,6 +15,7 @@ export default class UTSCombat extends Combat {
 
   /**
    * Adds a player combatant to the current combat
+   * @returns {Promise<import("./UTSCombatant.mjs").default>} The created Combatant
    */
   async addPlayer() {
     const data = {
@@ -33,6 +34,7 @@ export default class UTSCombat extends Combat {
     if (!user) return;
     data.name = user.name;
     data.img = user.avatar;
-    await this.createEmbeddedDocuments("Combatant", [data]);
+    const created = await this.createEmbeddedDocuments("Combatant", [data]);
+    return created.shift();
   }
 }

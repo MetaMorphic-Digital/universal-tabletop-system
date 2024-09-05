@@ -13,6 +13,7 @@ export default class Player extends foundry.abstract.TypeDataModel {
   /** @override */
   static LOCALIZATION_PREFIXES = ["UTS.Combat.player"];
 
+  /** @override */
   static defineSchema() {
     return {
       user: new foundry.data.fields.ForeignDocumentField(User)
