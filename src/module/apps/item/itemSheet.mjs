@@ -1,3 +1,4 @@
+import {systemPath} from "../../constants.mjs";
 import {prepareActiveEffectCategories} from "../../helpers/utils.mjs";
 
 const {api, sheets} = foundry.applications;
@@ -39,18 +40,18 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
   /** @override */
   static PARTS = {
     header: {
-      template: "systems/universal-tabletop-system/templates/item/header.hbs"
+      template: systemPath("templates/item/header.hbs")
     },
     tabs: {
       // Foundry-provided generic template
       template: "templates/generic/tab-navigation.hbs"
     },
     properties: {
-      template: "systems/universal-tabletop-system/templates/shared/properties.hbs",
+      template: systemPath("templates/shared/properties.hbs"),
       scrollable: [""]
     },
     effects: {
-      template: "systems/universal-tabletop-system/templates/shared/effects.hbs",
+      template: systemPath("templates/shared/effects.hbs"),
       scrollable: [""]
     }
   };
