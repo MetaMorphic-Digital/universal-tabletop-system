@@ -23,7 +23,7 @@ export default class UTSCombat extends Combat {
       system: {}
     };
     data.system.user = await foundry.applications.api.DialogV2.prompt({
-      window: {title: game.i18n.localize("UTS.Combat.AddPlayerCombatTracker")},
+      window: {title: "UTS.Combat.AddPlayerCombatTracker"},
       content: Player.schema.getField("user").toFormGroup().outerHTML,
       rejectClose: true,
       ok: {
