@@ -21,9 +21,9 @@
         "ItemSheet": "Default UTS Item Sheet"
       },
       "Tabs": {
-        "Properties": "Properties",
-        "Items": "Items",
-        "Effects": "Effects"
+        "properties": "Properties",
+        "items": "Items",
+        "effects": "Effects"
       }
     },
     "Combat": {

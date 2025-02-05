@@ -2,14 +2,14 @@
 <section class="tab effects flexcol scrollable {{tab.cssClass}}" data-group="primary" data-tab="effects">
   <ul class="effects-list">
     {{#each effects as |section sid|}}
-    <li class="effects-header flexrow" data-effect-type="{{section.type}}" data-drag="true">
+    <li class="effects-header flexrow draggable" data-effect-type="{{section.type}}">
       <div class="effect-label flexrow">
         {{localize section.label}}
       </div>
       <div class="effect-source">
-        {{localize "EFFECT.Origin"}}
+        {{localize "EFFECT.FIELDS.origin.label"}}
       </div>
-      <div class="effect-source">{{localize "EFFECT.TabDuration"}}</div>
+      <div class="effect-source">{{localize "EFFECT.TABS.duration"}}</div>
       <div class="document-controls flexrow">
         <a class="effect-controls"
           data-action="createDoc" data-document-class="ActiveEffect"
@@ -27,8 +27,8 @@
 
     <ul class="effect-list">
       {{#each section.effects as |effect|}}
-      <li class="effect flexrow" data-effect-id="{{effect.id}}" data-parent-id="{{effect.parent.id}}"
-        data-document-class="ActiveEffect" data-drag="true">
+      <li class="effect flexrow draggable" data-effect-id="{{effect.id}}" data-parent-id="{{effect.parent.id}}"
+        data-document-class="ActiveEffect">
         {{log effect}}
         <div class="effect-label flexrow">
           <img class="effect-image" src="{{effect.img}}" height="24" width="24">

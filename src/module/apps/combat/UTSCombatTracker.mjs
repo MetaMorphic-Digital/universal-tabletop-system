@@ -1,18 +1,21 @@
-export class UTSCombatTracker extends CombatTracker {
+export class UTSCombatTracker extends foundry.applications.sidebar.tabs.CombatTracker {
 
   /** @override */
-  activateListeners(html) {
-    const controls = html.find(".encounter-controls.combat");
-    controls.prepend(`<a class="combat-button combat-control" aria-label="${game.i18n.localize("UTS.Combat.AddPlayer")}"
-      role="button" data-tooltip="UTS.Combat.AddPlayer" data-control="addPlayer">
-      <i class="fas fa-plus"></i></a>`);
-    super.activateListeners(html);
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    const controls = this.element.querySelector(".encounter-controls.combat");
+    controls.insertAdjacentHTML("afterbegin", `<button class="inline-control combat-control icon fa-solid fa-user"
+      aria-label="${game.i18n.localize("UTS.Combat.AddPlayer")}"
+      type="button" data-tooltip="UTS.Combat.AddPlayer" data-action="addPlayer">
+      </button>`);
   }
 
   /** @override */
-  async _onCombatCreate(event) {
-    event.preventDefault();
-    const scene = game.scenes.current;
-    await getDocumentClass("Combat").createDialog({scene: scene?.id, active: true});
+  async _onCombatCreate(event, target) {
+    if (Combat.TYPES.length) {
+      const combat = await getDocumentClass("Combat").createDialog();
+      if (combat) combat.activate({render: false});
+    }
+    else super._onCombatCreate(event, target);
   }
 }
