@@ -22,7 +22,7 @@
       </li>
       <ul class="items">
         {{#each group.items as |item|}}
-          <li class="item flexrow" data-item-id="{{item._id}}" data-drag="true" data-document-class="Item">
+          <li class="item flexrow draggable" data-item-id="{{item._id}}" data-document-class="Item">
             <img src="{{item.img}}" title="{{item.name}}" width="24" height="24">
             <div class="item-name">{{item.name}}</div>
             <div class="document-controls">

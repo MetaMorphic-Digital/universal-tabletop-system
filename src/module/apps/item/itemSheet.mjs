@@ -31,7 +31,7 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
       submitOnChange: true
     },
     // Custom property that's merged into `this.options`
-    dragDrop: [{dragSelector: "[data-drag]", dropSelector: null}]
+    dragDrop: [{dragSelector: ".draggable", dropSelector: null}]
   };
 
   /* -------------------------------------------------- */
@@ -462,6 +462,10 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
   /*   handling and are unlikely to need modification   */
   /* -------------------------------------------------- */
 
+  // This is marked as private because there's no real need
+  // for subclasses or external hooks to mess with it directly
+  #dragDrop = this.#createDragDropHandlers();
+
   /**
    * Returns an array of DragDrop instances
    * @type {DragDrop[]}
@@ -469,12 +473,6 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
   get dragDrop() {
     return this.#dragDrop;
   }
-
-  /* -------------------------------------------------- */
-
-  // This is marked as private because there's no real need
-  // for subclasses or external hooks to mess with it directly
-  #dragDrop;
 
   /* -------------------------------------------------- */
 

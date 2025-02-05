@@ -1,75 +1,81 @@
 .application.sheet.uts {
   max-height: 90%;
 
-  & .sheet-header {
-    & img {
+  .sheet-header {
+    img {
       border: none;
       flex: 0 0 100px;
     }
-    & input[name="name"] {
+    input[name="name"] {
       height: 2.5em;
       font-size: 2rem;
     }
   }
-  & .tab[data-tab="items"] {
-    & ul {
+  .tab {
+    height: 100%;
+    padding-top: 10px;
+  }
+  .tab[data-tab="items"] {
+    ul {
       list-style: none;
       padding-left: 5px;
     }
-    & .itemHeader {
+    .itemHeader {
       border-bottom: 1px solid var(--color-border-light-primary);
-      & .type-label {
+      .type-label {
         font-size: 20px;
       }
-      & .document-controls {
+      .document-controls {
         flex: 0 0 100px;
       }
     }
-    & .item {
-      & img {
+    .item {
+      img {
         border: none;
         flex: 0 0 30px;
         padding-right: 5px;
       }
-      & .document-controls {
+      .document-controls {
         flex: 0 0 50px;
       }
     }
   }
-  & .tab[data-tab="effects"] {
-    & ul {
+  .tab[data-tab="effects"] {
+    ul {
       list-style: none;
       padding-left: 5px;
+      margin-top: 0;
+      margin-bottom: 0;
     }
-    & .effects-header {
+    .effects-header {
       font-size: 16px;
       border-bottom: 1px solid var(--color-border-light-primary);
-      & .effect-duration {
+      .effect-duration {
         flex: 0 0 80px;
       }
-      & .document-controls {
+      .document-controls {
         flex: 0 0 100px;
       }
     }
-    & .effect {
-      & .effect-label {
-        & img {
+    .effect {
+      .effect-label {
+        img {
           border: none;
           flex: 0 0 30px;
           padding-right: 5px;
         }
-        & .effect-name {
+        .effect-name {
           line-height: 24px;
         }
       }
-      & .effect-duration {
+      .effect-duration {
         flex: 0 0 130px;
       }
-      & .document-controls {
+      .document-controls {
         flex: 0 0 80px;
       }
     }
-    & .effect-label {
+    .effect-label {
       flex: 2;
     }
   }

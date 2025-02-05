@@ -68,7 +68,7 @@
   "flags": {
     "hotReload": {
       "extensions": ["css", "html", "hbs", "json"],
-      "paths": ["uts.css", "templates", "lang"]
+      "paths": [".", "templates", "lang"]
     }
   }
 }
