@@ -19,7 +19,6 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
       height: 600
     },
     actions: {
-      onEditImage: this._onEditImage,
       viewDoc: this._viewDoc,
       createDoc: this._createDoc,
       deleteDoc: this._deleteDoc,
@@ -187,30 +186,6 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
 
   /* -------------------------------------------------- */
   /*   Event handlers                                   */
-  /* -------------------------------------------------- */
-
-  /**
-   * Handle changing a Document's image.
-   *
-   * @this UTSActorSheet
-   * @param {PointerEvent} event   The originating click event
-   * @param {HTMLElement} target   The capturing HTML element which defined a [data-action]
-   * @returns {Promise}
-   * @protected
-   */
-  static async _onEditImage(event, target) {
-    const {img} = this.document.constructor.getDefaultArtwork?.(this.document.toObject()) ?? {};
-    const fp = new FilePicker({
-      current: this.document.img,
-      type: "image",
-      redirectToRoot: img ? [img] : [],
-      callback: (path) => this.document.update({img: path}),
-      top: this.position.top + 40,
-      left: this.position.left + 10
-    });
-    return fp.browse();
-  }
-
   /* -------------------------------------------------- */
 
   /**
