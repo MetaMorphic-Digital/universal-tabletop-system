@@ -12,7 +12,10 @@ export class UTSCombatTracker extends foundry.applications.sidebar.tabs.CombatTr
 
   /** @override */
   async _onCombatCreate(event, target) {
-    const combat = await getDocumentClass("Combat").createDialog();
-    combat.activate({render: false});
+    if (Combat.TYPES.length) {
+      const combat = await getDocumentClass("Combat").createDialog();
+      combat.activate({render: false});
+    }
+    else super._onCombatCreate(event, target);
   }
 }
