@@ -20,9 +20,8 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
     position: {
       width: 600
     },
-    classes: ["uts", "item"],
+    classes: ["uts", "item", "standard-form"],
     actions: {
-      onEditImage: this._onEditImage,
       viewDoc: this._viewEffect,
       createDoc: this._createEffect,
       deleteDoc: this._deleteEffect,
@@ -33,6 +32,23 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
     },
     // Custom property that's merged into `this.options`
     dragDrop: [{dragSelector: "[data-drag]", dropSelector: null}]
+  };
+
+  /* -------------------------------------------------- */
+
+  static TABS = {
+    primary: {
+      tabs: [
+        {
+          id: "properties"
+        },
+        {
+          id: "effects"
+        }
+      ],
+      initial: "properties",
+      labelPrefix: "UTS.Sheets.Tabs"
+    }
   };
 
   /* -------------------------------------------------- */
@@ -60,19 +76,18 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
 
   /** @override */
   async _prepareContext(options) {
-    const context = {
-      editable: this.isEditable,
+    const context = await super._prepareContext(options);
+
+    Object.assign(context, {
       owner: this.document.isOwner,
       limited: this.document.limited,
-      document: this.document,
       item: this.item,
-      actor: this.item.actor,
+      actor: this.actor,
       system: this.item.system,
       flags: this.item.flags,
       itemFields: this.item.schema.fields,
-      config: CONFIG,
-      tabs: this._getTabs(options.parts)
-    };
+      config: CONFIG
+    });
 
     return context;
   }
@@ -93,47 +108,6 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
         break;
     }
     return context;
-  }
-
-  /* -------------------------------------------------- */
-
-  /**
-   * Generates the data for the generic tab navigation template
-   * @param {string[]} parts An array of named template parts to render
-   * @returns {Record<string, Partial<ApplicationTab>>}
-   * @protected
-   */
-  _getTabs(parts) {
-    // If you have sub-tabs this is necessary to change
-    const tabGroup = "primary";
-    // Default tab for first time it's rendered this session
-    if (!this.tabGroups[tabGroup]) this.tabGroups[tabGroup] = "properties";
-    return parts.reduce((tabs, partId) => {
-      const tab = {
-        cssClass: "",
-        group: tabGroup,
-        id: "",
-        icon: "",
-        // Run through localization
-        label: "UTS.Sheets.Tabs."
-      };
-      switch (partId) {
-        case "header":
-        case "tabs":
-          return tabs;
-        case "properties":
-          tab.id = "properties";
-          tab.label += "Properties";
-          break;
-        case "effects":
-          tab.id = "effects";
-          tab.label += "Effects";
-          break;
-      }
-      if (this.tabGroups[tabGroup] === tab.id) tab.cssClass = "active";
-      tabs[partId] = tab;
-      return tabs;
-    }, {});
   }
 
   /* -------------------------------------------------- */

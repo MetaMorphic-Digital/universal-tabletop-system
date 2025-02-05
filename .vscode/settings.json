@@ -1,5 +1,5 @@
 {
-  "i18n-ally.localesPaths": ["lang", "foundry/lang"],
+  "i18n-ally.localesPaths": ["foundry/lang", "lang"],
   "i18n-ally.keystyle": "nested",
   "[javascript]": {
     "editor.defaultFormatter": "vscode.typescript-language-features",
