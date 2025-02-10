@@ -76,23 +76,21 @@ export default class UTSCombat extends Combat {
     let defaultType = CONFIG[this.documentName]?.defaultType;
     let defaultTypeAllowed = false;
     let hasTypes = false;
-    if (this.TYPES.length > 1) {
-      if (types?.length === 0) throw new Error("The array of sub-types to restrict to must not be empty");
+    if (types?.length === 0) throw new Error("The array of sub-types to restrict to must not be empty");
 
-      // Register supported types
-      for (const type of this.TYPES) {
-        if (types && !types.includes(type)) continue;
-        let label = CONFIG[this.documentName]?.typeLabels?.[type];
-        label = label && game.i18n.has(label) ? game.i18n.localize(label) : type;
-        documentTypes.push({value: type, label});
-        if (type === defaultType) defaultTypeAllowed = true;
-      }
-      if (!documentTypes.length) throw new Error("No document types were permitted to be created");
-
-      if (!defaultTypeAllowed) defaultType = documentTypes[0].value;
-      // Sort alphabetically
-      documentTypes.sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
+    // Register supported types
+    for (const type of this.TYPES) {
+      if (types && !types.includes(type)) continue;
+      let label = CONFIG[this.documentName]?.typeLabels?.[type];
+      label = label && game.i18n.has(label) ? game.i18n.localize(label) : type;
+      documentTypes.push({value: type, label});
+      if (type === defaultType) defaultTypeAllowed = true;
     }
+    if (!documentTypes.length) throw new Error("No document types were permitted to be created");
+
+    if (!defaultTypeAllowed) defaultType = documentTypes[0].value;
+    // Sort alphabetically
+    documentTypes.sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
 
     // Collect data
     const label = game.i18n.localize(this.metadata.label);
@@ -120,7 +118,7 @@ export default class UTSCombat extends Combat {
           const fd = new FormDataExtended(button.form);
           foundry.utils.mergeObject(data, fd.object);
           if (!data.name?.trim()) data.name = cls.defaultName({type: data.type, parent, pack});
-          return cls.create(data, {renderSheet: true, ...createOptions});
+          return cls.create(data, {renderSheet: false, ...createOptions});
         }
       }
     }, dialogOptions));
