@@ -49,8 +49,8 @@
     "Actor": {
       "chess": "Chess Piece"
     },
-    "Combat": {
-      "player": "Player Turns"
+    "Combatant": {
+      "player": "Player"
     }
   }
 }
