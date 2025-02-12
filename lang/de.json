@@ -1,0 +1,56 @@
+{
+  "UTS": {
+    "Chess": {
+      "Pieces": {
+        "P": "Pawn",
+        "N": "Knight",
+        "B": "Bishop",
+        "R": "Rook",
+        "Q": "Queen",
+        "K": "King"
+      },
+      "FIELDS": {
+        "piece": {
+          "label": "Piece"
+        }
+      }
+    },
+    "Sheets": {
+      "Labels": {
+        "ActorSheet": "Default UTS Actor Sheet",
+        "ItemSheet": "Default UTS Item Sheet"
+      },
+      "Tabs": {
+        "properties": "Properties",
+        "items": "Items",
+        "effects": "Effects"
+      }
+    },
+    "Combat": {
+      "AddPlayer": "Add Player",
+      "AddPlayerCombatTracker": "Add Player to Combat Tracker",
+      "player": {
+        "FIELDS": {
+          "user": {
+            "label": "Player"
+          }
+        }
+      }
+    },
+    "Effect": {
+      "Label": "Effect",
+      "Inactive": "Inactive",
+      "Passive": "Passive",
+      "Temporary": "Temporary",
+      "Toggle": "Toggle Effect"
+    }
+  },
+  "TYPES": {
+    "Actor": {
+      "chess": "Chess Piece"
+    },
+    "Combatant": {
+      "player": "Player"
+    }
+  }
+}
