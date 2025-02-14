@@ -2,55 +2,55 @@
   "UTS": {
     "Chess": {
       "Pieces": {
-        "P": "Pawn",
-        "N": "Knight",
-        "B": "Bishop",
-        "R": "Rook",
-        "Q": "Queen",
-        "K": "King"
+        "P": "Bauer",
+        "N": "Springer",
+        "B": "Läufer",
+        "R": "Turm",
+        "Q": "Königin",
+        "K": "König"
       },
       "FIELDS": {
         "piece": {
-          "label": "Piece"
+          "label": "Spielfigur"
         }
       }
     },
     "Sheets": {
       "Labels": {
-        "ActorSheet": "Default UTS Actor Sheet",
-        "ItemSheet": "Default UTS Item Sheet"
+        "ActorSheet": "Standard UTS Actor Sheet",
+        "ItemSheet": "Standard UTS Item Sheet"
       },
       "Tabs": {
-        "properties": "Properties",
+        "properties": "Eigenschaften",
         "items": "Items",
-        "effects": "Effects"
+        "effects": "Effekte"
       }
     },
     "Combat": {
-      "AddPlayer": "Add Player",
-      "AddPlayerCombatTracker": "Add Player to Combat Tracker",
+      "AddPlayer": "Spieler hinzfügen",
+      "AddPlayerCombatTracker": "Füge Spieler zum Combat Tracker hinzu",
       "player": {
         "FIELDS": {
           "user": {
-            "label": "Player"
+            "label": "Spieler"
           }
         }
       }
     },
     "Effect": {
-      "Label": "Effect",
-      "Inactive": "Inactive",
-      "Passive": "Passive",
-      "Temporary": "Temporary",
-      "Toggle": "Toggle Effect"
+      "Label": "Effekt",
+      "Inactive": "Inaktiv",
+      "Passive": "Passiv",
+      "Temporary": "Temporär",
+      "Toggle": "Effekt umschalten"
     }
   },
   "TYPES": {
     "Actor": {
-      "chess": "Chess Piece"
+      "chess": "Schachfigur"
     },
     "Combatant": {
-      "player": "Player"
+      "player": "Spieler"
     }
   }
 }
