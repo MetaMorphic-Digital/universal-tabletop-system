@@ -1,0 +1,56 @@
+{
+  "UTS": {
+    "Chess": {
+      "Pieces": {
+        "P": "Bauer",
+        "N": "Springer",
+        "B": "Läufer",
+        "R": "Turm",
+        "Q": "Königin",
+        "K": "König"
+      },
+      "FIELDS": {
+        "piece": {
+          "label": "Spielfigur"
+        }
+      }
+    },
+    "Sheets": {
+      "Labels": {
+        "ActorSheet": "Standard UTS Actor Sheet",
+        "ItemSheet": "Standard UTS Item Sheet"
+      },
+      "Tabs": {
+        "properties": "Eigenschaften",
+        "items": "Items",
+        "effects": "Effekte"
+      }
+    },
+    "Combat": {
+      "AddPlayer": "Spieler hinzfügen",
+      "AddPlayerCombatTracker": "Füge Spieler zum Combat Tracker hinzu",
+      "player": {
+        "FIELDS": {
+          "user": {
+            "label": "Spieler"
+          }
+        }
+      }
+    },
+    "Effect": {
+      "Label": "Effekt",
+      "Inactive": "Inaktiv",
+      "Passive": "Passiv",
+      "Temporary": "Temporär",
+      "Toggle": "Effekt umschalten"
+    }
+  },
+  "TYPES": {
+    "Actor": {
+      "chess": "Schachfigur"
+    },
+    "Combatant": {
+      "player": "Spieler"
+    }
+  }
+}
