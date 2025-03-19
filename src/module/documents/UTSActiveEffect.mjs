@@ -1,5 +1,5 @@
-export default class UTSActiveEffect extends ActiveEffect {
-  /** @override */
+export default class UTSActiveEffect extends foundry.documents.ActiveEffect {
+  /** @inheritdoc */
   prepareDerivedData() {
     super.prepareDerivedData();
 

@@ -1,18 +1,17 @@
 export class UTSCombatTracker extends foundry.applications.sidebar.tabs.CombatTracker {
-
-  /** @override */
-  async _onRender(context, options) {
-    await super._onRender(context, options);
-    const controls = this.element.querySelector(".encounter-controls.combat");
-    if (controls) {
-      controls.insertAdjacentHTML("afterbegin", `<button class="inline-control combat-control icon fa-solid fa-user"
-        aria-label="${game.i18n.localize("UTS.Combat.AddPlayer")}"
-        type="button" data-tooltip="UTS.Combat.AddPlayer" data-action="addPlayer">
-      </button>`);
-    }
+  /** @inheritdoc */
+  _getCombatContextOptions() {
+    const options = super._getCombatContextOptions();
+    options.unshift({
+      name: "UTS.Combat.AddPlayer",
+      icon: "<i class=\"fa-solid fa-user\"></i>",
+      condition: () => game.user.isGM,
+      callback: () => this.viewed.addPlayer()
+    });
+    return options;
   }
 
-  /** @override */
+  /** @inheritdoc */
   async _onCombatCreate(event, target) {
     if (Combat.TYPES.length > 1) {
       const combat = await getDocumentClass("Combat").createDialog();

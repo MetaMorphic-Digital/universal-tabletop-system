@@ -1,5 +1,5 @@
-export default class UTSItem extends Item {
-  /** @override */
+export default class UTSItem extends foundry.documents.Item {
+  /** @inheritdoc */
   prepareDerivedData() {
     super.prepareDerivedData();
 

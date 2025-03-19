@@ -1,5 +1,5 @@
-export default class UTSUser extends User {
-  /** @override */
+export default class UTSUser extends foundry.documents.User {
+  /** @inheritdoc */
   prepareDerivedData() {
     super.prepareDerivedData();
 

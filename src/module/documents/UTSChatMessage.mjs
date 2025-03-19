@@ -1,5 +1,5 @@
-export default class UTSChatMessage extends ChatMessage {
-  /** @override */
+export default class UTSChatMessage extends foundry.documents.ChatMessage {
+  /** @inheritdoc */
   prepareDerivedData() {
     super.prepareDerivedData();
 

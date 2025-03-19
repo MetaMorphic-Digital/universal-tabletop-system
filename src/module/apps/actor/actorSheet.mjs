@@ -11,7 +11,7 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
 
   /* -------------------------------------------------- */
 
-  /** @override */
+  /** @inheritdoc */
   static DEFAULT_OPTIONS = {
     classes: ["uts", "actor", "standard-form"],
     position: {
@@ -49,7 +49,7 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
 
   /* -------------------------------------------------- */
 
-  /** @override */
+  /** @inheritdoc */
   static PARTS = {
     header: {
       template: systemPath("templates/actor/header.hbs")
@@ -73,7 +73,7 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
 
   /* -------------------------------------------------- */
 
-  /** @override */
+  /** @inheritdoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
 
@@ -92,7 +92,7 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
 
   /* -------------------------------------------------- */
 
-  /** @override */
+  /** @inheritdoc */
   async _preparePartContext(partId, context) {
     switch (partId) {
       case "effects":
@@ -177,7 +177,7 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
    * @param {ApplicationRenderContext} context      Prepared context data
    * @param {RenderOptions} options                 Provided render options
    * @protected
-   * @override
+   * @inheritdoc
    */
   async _onRender(context, options) {
     await super._onRender(context, options);
@@ -291,7 +291,7 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
    * @param {object} submitData                   Processed and validated form data to be used for a document update
    * @returns {Promise<void>}
    * @protected
-   * @override
+   * @inheritdoc
    */
   async _processSubmitData(event, form, submitData) {
     const overrides = foundry.utils.flattenObject(this.actor.overrides);

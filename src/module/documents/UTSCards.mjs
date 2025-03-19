@@ -1,5 +1,5 @@
-export default class UTSCards extends Cards {
-  /** @override */
+export default class UTSCards extends foundry.documents.Cards {
+  /** @inheritdoc */
   prepareDerivedData() {
     super.prepareDerivedData();
 

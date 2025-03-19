@@ -15,7 +15,7 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
 
   /* -------------------------------------------------- */
 
-  /** @override */
+  /** @inheritdoc */
   static DEFAULT_OPTIONS = {
     position: {
       width: 600
@@ -53,7 +53,7 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
 
   /* -------------------------------------------------- */
 
-  /** @override */
+  /** @inheritdoc */
   static PARTS = {
     header: {
       template: systemPath("templates/item/header.hbs")
@@ -74,7 +74,7 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
 
   /* -------------------------------------------------- */
 
-  /** @override */
+  /** @inheritdoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
 
@@ -94,7 +94,7 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
 
   /* -------------------------------------------------- */
 
-  /** @override */
+  /** @inheritdoc */
   async _preparePartContext(partId, context) {
     // TODO: Come up with clever way to automatically handle enriching HTML fields
     switch (partId) {
