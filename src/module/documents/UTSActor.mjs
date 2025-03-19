@@ -1,5 +1,5 @@
-export default class UTSActor extends Actor {
-  /** @override */
+export default class UTSActor extends foundry.documents.Actor {
+  /** @inheritdoc */
   prepareDerivedData() {
     super.prepareDerivedData();
 

@@ -1,5 +1,5 @@
-export default class UTSScene extends Scene {
-  /** @override */
+export default class UTSScene extends foundry.documents.Scene {
+  /** @inheritdoc */
   prepareDerivedData() {
     super.prepareDerivedData();
 

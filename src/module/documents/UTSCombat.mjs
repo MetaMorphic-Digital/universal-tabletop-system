@@ -1,8 +1,8 @@
 import Player from "../data/combatant/player.mjs";
 import {systemPath} from "../constants.mjs";
 
-export default class UTSCombat extends Combat {
-  /** @override */
+export default class UTSCombat extends foundry.documents.Combat {
+  /** @inheritdoc */
   prepareDerivedData() {
 
     super.prepareDerivedData();
@@ -23,14 +23,11 @@ export default class UTSCombat extends Combat {
       type: "player",
       system: {}
     };
-    data.system.user = await foundry.applications.api.DialogV2.prompt({
+    const fdObject = await foundry.applications.api.DialogV2.input({
       window: {title: "UTS.Combat.AddPlayerCombatTracker"},
-      content: Player.schema.getField("user").toFormGroup().outerHTML,
-      rejectClose: true,
-      ok: {
-        callback: (event, button, dialog) => button.form.elements["system.user"].value
-      }
+      content: Player.schema.getField("user").toFormGroup().outerHTML
     });
+    foundry.utils.mergeObject(data, fdObject);
     const user = game.users.get(data.system.user);
     if (!user) return;
     data.name = user.name;
@@ -41,7 +38,7 @@ export default class UTSCombat extends Combat {
 
   /**
    * @remarks Variant createDialog that includes the Base type
-   * @override
+   * @inheritdoc
    * @param {import("../../../foundry/common/types.mjs").CombatData} data
    * @param {import("../../../foundry/common/abstract/_types.mjs").DatabaseCreateOperation} createOptions
    * @param {context} context Options forwarded to DialogV2.prompt

@@ -1,5 +1,5 @@
-export default class UTSCombatant extends Combatant {
-  /** @override */
+export default class UTSCombatant extends foundry.documents.Combatant {
+  /** @inheritdoc */
   prepareDerivedData() {
     super.prepareDerivedData();
 

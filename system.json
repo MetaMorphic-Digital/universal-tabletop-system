@@ -26,8 +26,8 @@
   ],
   "version": "AUTOMATIC",
   "compatibility": {
-    "minimum": 13,
-    "verified": "13.335"
+    "minimum": "13.338",
+    "verified": "13.338"
   },
   "esmodules": ["uts.mjs"],
   "styles": ["uts.css"],
