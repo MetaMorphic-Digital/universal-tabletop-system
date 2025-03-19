@@ -23,14 +23,11 @@ export default class UTSCombat extends foundry.documents.Combat {
       type: "player",
       system: {}
     };
-    data.system.user = await foundry.applications.api.DialogV2.prompt({
+    const fdObject = await foundry.applications.api.DialogV2.input({
       window: {title: "UTS.Combat.AddPlayerCombatTracker"},
-      content: Player.schema.getField("user").toFormGroup().outerHTML,
-      rejectClose: false,
-      ok: {
-        callback: (event, button, dialog) => button.form.elements["system.user"].value
-      }
+      content: Player.schema.getField("user").toFormGroup().outerHTML
     });
+    foundry.utils.mergeObject(data, fdObject);
     const user = game.users.get(data.system.user);
     if (!user) return;
     data.name = user.name;
