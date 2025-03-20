@@ -39,8 +39,8 @@ export default class UTSCombat extends foundry.documents.Combat {
   /**
    * @remarks Variant createDialog that includes the Base type
    * @inheritdoc
-   * @param {import("../../../foundry/common/types.mjs").CombatData} data
-   * @param {import("../../../foundry/common/abstract/_types.mjs").DatabaseCreateOperation} createOptions
+   * @param {import("@common/types.mjs").CombatData} data
+   * @param {import("@common/abstract/_types.mjs").DatabaseCreateOperation} createOptions
    * @param {context} context Options forwarded to DialogV2.prompt
    * @param {string[]} [context.types]   A restriction of the selectable sub-types of the Dialog.
    * @param {string} [context.template]  A template to use for the dialog contents instead of the default.
@@ -112,7 +112,7 @@ export default class UTSCombat extends foundry.documents.Combat {
       ok: {
         label: title,
         callback: (event, button) => {
-          const fd = new FormDataExtended(button.form);
+          const fd = new foundry.applications.ux.FormDataExtended(button.form);
           foundry.utils.mergeObject(data, fd.object);
           if (!data.name?.trim()) data.name = cls.defaultName({type: data.type, parent, pack});
           return cls.create(data, {renderSheet: false, ...createOptions});
