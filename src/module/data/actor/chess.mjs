@@ -1,3 +1,6 @@
+/**
+ * Simple data model for chess pieces as a type of actor
+ */
 export default class ChessData extends foundry.abstract.TypeDataModel {
   /**
    * Metadata that describes this subtype.
@@ -16,10 +19,8 @@ export default class ChessData extends foundry.abstract.TypeDataModel {
 
   /** @inheritdoc */
   static defineSchema() {
-    const {StringField} = foundry.data.fields;
-
     return {
-      piece: new StringField({
+      piece: new foundry.data.fields.StringField({
         required: true,
         choices: CONFIG.UTS.chess.pieces,
         initial: "pawn"

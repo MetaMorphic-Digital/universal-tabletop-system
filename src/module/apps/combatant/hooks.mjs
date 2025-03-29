@@ -1,11 +1,14 @@
+/** @import CombatantConfig from "@client/applications/sheets/combatant-config.mjs" */
+/** @import UTSCombatant from "../../documents/UTSCombatant.mjs" */
+
 /**
  *
  * @param {CombatantConfig} app
  * @param {HTMLDivElement[]} jquery
- * @param {Record<string, unknown>} context
+ * @param {object} context
  */
 export function renderCombatantConfig(app, [html], context) {
-  /** @type {import("../../documents/UTSCombatant.mjs").default} */
+  /** @type {UTSCombatant} */
   const combatant = app.document;
   if (combatant.type === "player") {
     const form = html.querySelector("form");

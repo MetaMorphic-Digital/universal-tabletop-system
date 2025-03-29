@@ -1,5 +1,5 @@
 /**
- * A "turns belong to users rather than tokens" variant of combat
+ * A "turns belong to users rather than tokens" variant of combatant
  */
 export default class Player extends foundry.abstract.TypeDataModel {
   /**
@@ -16,7 +16,7 @@ export default class Player extends foundry.abstract.TypeDataModel {
   /** @inheritdoc */
   static defineSchema() {
     return {
-      user: new foundry.data.fields.ForeignDocumentField(User)
+      user: new foundry.data.fields.ForeignDocumentField(foundry.documents.User)
     };
   }
 }

@@ -1,3 +1,6 @@
+/**
+ * A simple extension that adds a hook at the end of data prep
+ */
 export default class UTSScene extends foundry.documents.Scene {
   /** @inheritdoc */
   prepareDerivedData() {
