@@ -1,3 +1,6 @@
+/**
+ * Helper class to manage all socket operations within the system
+ */
 export default class UTSSocketHandler {
   constructor() {
     this.identifier = "system.universal-tabletop-system";

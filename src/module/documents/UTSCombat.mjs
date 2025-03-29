@@ -1,6 +1,9 @@
 import Player from "../data/combatant/player.mjs";
 import {systemPath} from "../constants.mjs";
 
+/**
+ * A simple extension that adds a hook at the end of data prep
+ */
 export default class UTSCombat extends foundry.documents.Combat {
   /** @inheritdoc */
   prepareDerivedData() {
