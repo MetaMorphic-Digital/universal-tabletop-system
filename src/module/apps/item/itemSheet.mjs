@@ -17,10 +17,10 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
     },
     classes: ["uts", "item", "standard-form"],
     actions: {
-      viewDoc: this._viewEffect,
-      createDoc: this._createEffect,
-      deleteDoc: this._deleteEffect,
-      toggleEffect: this._toggleEffect
+      viewDoc: this.#viewEffect,
+      createDoc: this.#createEffect,
+      deleteDoc: this.#deleteEffect,
+      toggleEffect: this.#toggleEffect
     },
     form: {
       submitOnChange: true
@@ -163,30 +163,6 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
   /* -------------------------------------------------- */
 
   /**
-   * Handle changing a Document's image.
-   *
-   * @this UTSItemSheet
-   * @param {PointerEvent} event   The originating click event
-   * @param {HTMLElement} target   The capturing HTML element which defined a [data-action]
-   * @returns {Promise}
-   * @protected
-   */
-  static async _onEditImage(event, target) {
-    const {img} = this.document.constructor.getDefaultArtwork?.(this.document.toObject()) ?? {};
-    const fp = new FilePicker({
-      current: this.document.img,
-      type: "image",
-      redirectToRoot: img ? [img] : [],
-      callback: (path) => this.document.update({img: path}),
-      top: this.position.top + 40,
-      left: this.position.left + 10
-    });
-    return fp.browse();
-  }
-
-  /* -------------------------------------------------- */
-
-  /**
    * Renders an embedded document's sheet
    *
    * @this UTSItemSheet
@@ -194,7 +170,7 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
    * @param {HTMLElement} target   The capturing HTML element which defined a [data-action]
    * @protected
    */
-  static async _viewEffect(event, target) {
+  static async #viewEffect(event, target) {
     const effect = this._getEffect(target);
     effect.sheet.render(true);
   }
@@ -209,7 +185,7 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
    * @param {HTMLElement} target   The capturing HTML element which defined a [data-action]
    * @protected
    */
-  static async _deleteEffect(event, target) {
+  static async #deleteEffect(event, target) {
     const effect = this._getEffect(target);
     effect.delete();
   }
@@ -224,7 +200,7 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
    * @param {HTMLElement} target   The capturing HTML element which defined a [data-action]
    * @private
    */
-  static async _createEffect(event, target) {
+  static async #createEffect(event, target) {
     const aeCls = getDocumentClass("ActiveEffect");
     const effectData = {
       name: aeCls.defaultName({
@@ -250,7 +226,7 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
    * @param {HTMLElement} target   The capturing HTML element which defined a [data-action]
    * @private
    */
-  static async _toggleEffect(event, target) {
+  static async #toggleEffect(event, target) {
     const effect = this._getEffect(target);
     effect.update({disabled: !effect.disabled});
   }
@@ -336,7 +312,7 @@ export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemShee
    * @protected
    */
   async _onDrop(event) {
-    const data = TextEditor.getDragEventData(event);
+    const data = foundry.applications.ux.TextEditor.implementation.getDragEventData(event);
     const item = this.item;
     const allowed = Hooks.call("dropItemSheetData", item, this, data);
     if (allowed === false) return;
