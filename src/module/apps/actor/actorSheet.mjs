@@ -18,10 +18,10 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
       height: 600
     },
     actions: {
-      viewDoc: this._viewDoc,
-      createDoc: this._createDoc,
-      deleteDoc: this._deleteDoc,
-      toggleEffect: this._toggleEffect
+      viewDoc: this.#viewDoc,
+      createDoc: this.#createDoc,
+      deleteDoc: this.#deleteDoc,
+      toggleEffect: this.#toggleEffect
     },
     form: {
       submitOnChange: true
@@ -195,7 +195,7 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
    * @param {HTMLElement} target   The capturing HTML element which defined a [data-action]
    * @protected
    */
-  static async _viewDoc(event, target) {
+  static async #viewDoc(event, target) {
     const doc = this._getEmbeddedDocument(target);
     doc.sheet.render(true);
   }
@@ -210,7 +210,7 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
    * @param {HTMLElement} target   The capturing HTML element which defined a [data-action]
    * @protected
    */
-  static async _deleteDoc(event, target) {
+  static async #deleteDoc(event, target) {
     const doc = this._getEmbeddedDocument(target);
     doc.delete();
   }
@@ -225,7 +225,7 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
    * @param {HTMLElement} target   The capturing HTML element which defined a [data-action]
    * @private
    */
-  static async _createDoc(event, target) {
+  static async #createDoc(event, target) {
     const docCls = getDocumentClass(target.dataset.documentClass);
     const docData = {
       name: docCls.defaultName({
@@ -250,7 +250,7 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
    * @param {HTMLElement} target   The capturing HTML element which defined a [data-action]
    * @private
    */
-  static async _toggleEffect(event, target) {
+  static async #toggleEffect(event, target) {
     const effect = this._getEmbeddedDocument(target);
     effect.update({disabled: !effect.disabled});
   }
