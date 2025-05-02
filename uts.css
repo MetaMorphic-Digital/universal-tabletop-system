@@ -1,6 +1,12 @@
 .application.sheet.uts {
   max-height: 90%;
 
+  &.actor, &.item {
+    .window-content {
+      padding-top: 0;
+    }
+  }
+
   .sheet-header {
     img {
       border: none;
