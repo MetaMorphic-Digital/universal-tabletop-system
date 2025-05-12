@@ -73,6 +73,17 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
   /* -------------------------------------------------- */
 
   /** @inheritdoc */
+  _initializeApplicationOptions(options) {
+    const initialized = super._initializeApplicationOptions(options);
+
+    initialized.classes.push(initialized.document.type);
+
+    return initialized;
+  }
+
+  /* -------------------------------------------------- */
+
+  /** @inheritdoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
 
