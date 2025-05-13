@@ -22,7 +22,6 @@
   },
   "homepage": "https://github.com/MetaMorphic-Digital/universal-tabletop-system#readme",
   "devDependencies": {
-    "@foundryvtt/foundryvtt-cli": "^1.0.4",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "eslint": "^8.57.0",
     "rollup": "^4.9.1"
