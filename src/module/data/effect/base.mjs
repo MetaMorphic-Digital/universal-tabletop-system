@@ -21,6 +21,7 @@ export default class BaseEffectData extends foundry.abstract.TypeDataModel {
 
   /**
    * Disable effects whose durations has expired.
+   * @type {boolean}
    */
   get isSuppressed() {
     const remaining = this.parent.duration.remaining;
