@@ -60,6 +60,7 @@
   "secondaryTokenAttribute": "",
   "documentTypes": {
     "Actor": {
+      "token": {},
       "chess": {}
     },
     "Item": {},

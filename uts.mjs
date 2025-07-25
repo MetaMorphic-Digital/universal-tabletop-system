@@ -21,6 +21,8 @@ Hooks.once("init", () => {
     }
   }
 
+  CONFIG.Actor.defaultType = "token";
+
   // Document Sheets
   foundry.documents.collections.Actors.registerSheet("uts", apps.Actor.UTSActorSheet, {
     makeDefault: true, label: "UTS.Sheets.Labels.ActorSheet"
