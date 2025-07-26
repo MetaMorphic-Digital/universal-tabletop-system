@@ -7,9 +7,6 @@ const {api, sheets} = foundry.applications;
  * Extend the basic ActorSheet with some very simple modifications
  */
 export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSheet) {
-
-  /* -------------------------------------------------- */
-
   /** @inheritdoc */
   static DEFAULT_OPTIONS = {
     classes: ["uts", "actor", "standard-form"],
@@ -27,6 +24,8 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
       submitOnChange: true
     }
   };
+
+  /* -------------------------------------------------- */
 
   static TABS = {
     primary: {

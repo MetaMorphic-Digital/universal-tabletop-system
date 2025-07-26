@@ -1,3 +1,7 @@
 import BaseEffectData from "./base.mjs";
 
-export {BaseEffectData};
+const config = {
+  base: BaseEffectData
+};
+
+export {BaseEffectData, config};

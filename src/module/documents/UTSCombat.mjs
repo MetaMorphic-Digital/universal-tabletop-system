@@ -17,6 +17,8 @@ export default class UTSCombat extends foundry.documents.Combat {
     Hooks.callAll("UTS.prepareCombatData", this);
   }
 
+  /* -------------------------------------------------- */
+
   /**
    * Adds a player combatant to the current combat
    * @returns {Promise<import("./UTSCombatant.mjs").default>} The created Combatant
@@ -38,6 +40,8 @@ export default class UTSCombat extends foundry.documents.Combat {
     const created = await this.createEmbeddedDocuments("Combatant", [data]);
     return created.shift();
   }
+
+  /* -------------------------------------------------- */
 
   /**
    * @remarks Variant createDialog that includes the Base type

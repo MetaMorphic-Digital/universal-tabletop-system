@@ -11,6 +11,8 @@ export class UTSCombatTracker extends foundry.applications.sidebar.tabs.CombatTr
     return options;
   }
 
+  /* -------------------------------------------------- */
+
   /** @inheritdoc */
   async _onCombatCreate(event, target) {
     if (Combat.TYPES.length > 1) {

@@ -14,12 +14,9 @@ Hooks.once("init", () => {
     CONFIG[docCls.documentName].documentClass = docCls;
   }
 
-  // Assign data models
-  for (const [doc, models] of Object.entries(dataModels)) {
-    for (const modelCls of Object.values(models)) {
-      CONFIG[doc].dataModels[modelCls.metadata.type] = modelCls;
-    }
-  }
+  Object.assign(CONFIG.ActiveEffect.dataModels, dataModels.ActiveEffect.config);
+  Object.assign(CONFIG.Actor.dataModels, dataModels.Actor.config);
+  Object.assign(CONFIG.Combatant.dataModels, dataModels.Combatant.config);
 
   CONFIG.Actor.defaultType = "token";
 

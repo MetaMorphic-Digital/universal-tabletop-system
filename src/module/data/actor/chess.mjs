@@ -1,17 +1,7 @@
 /**
  * Simple data model for chess pieces as a type of actor
  */
-export default class ChessData extends foundry.abstract.TypeDataModel {
-  /**
-   * Metadata that describes this subtype.
-   * @type {object}
-   */
-  static metadata = Object.freeze({
-    type: "chess"
-  });
-
-  /* -------------------------------------------------- */
-
+export default class ChessModel extends foundry.abstract.TypeDataModel {
   /** @inheritdoc */
   static LOCALIZATION_PREFIXES = ["UTS.Chess"];
 

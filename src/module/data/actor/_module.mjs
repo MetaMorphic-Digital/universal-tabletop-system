@@ -1,2 +1,9 @@
-export {default as ChessData} from "./chess.mjs";
-export {default as GameTokenModel} from "./game-token.mjs";
+import ChessModel from "./chess.mjs";
+import GameTokenModel from "./game-token.mjs";
+
+const config = {
+  chess: ChessModel,
+  token: GameTokenModel
+};
+
+export {ChessModel, GameTokenModel, config};
