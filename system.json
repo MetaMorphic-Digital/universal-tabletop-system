@@ -45,7 +45,6 @@
   ],
   "packs": [],
   "packFolders": [],
-  "socket": true,
   "manifest": "https://github.com/MetaMorphic-Digital/universal-tabletop-system/releases/latest/download/system.json",
   "download": "AUTOMATIC",
   "background": "",

@@ -1,5 +1,4 @@
 import UTS from "./src/module/config.mjs";
-import UTSSocketHandler from "./src/module/helpers/sockets.mjs";
 import * as apps from "./src/module/apps/_module.mjs";
 import * as documents from "./src/module/documents/_module.mjs";
 import * as dataModels from "./src/module/data/_module.mjs";
@@ -7,7 +6,6 @@ import {localizeHelper} from "./src/module/helpers/utils.mjs";
 
 Hooks.once("init", () => {
   CONFIG.UTS = UTS;
-  game.system.socketHandler = new UTSSocketHandler();
 
   // Assign document classes
   for (const docCls of Object.values(documents)) {
