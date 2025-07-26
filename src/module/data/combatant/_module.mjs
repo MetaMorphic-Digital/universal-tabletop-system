@@ -1,3 +1,7 @@
 import Player from "./player.mjs";
 
-export {Player};
+const config = {
+  player: Player
+};
+
+export {Player, config};

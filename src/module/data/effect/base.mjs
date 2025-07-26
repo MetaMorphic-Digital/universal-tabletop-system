@@ -2,16 +2,6 @@
  * Base data model for active effects. Can be replaced if duration logic is not desired.
  */
 export default class BaseEffectData extends foundry.abstract.TypeDataModel {
-  /**
-   * Metadata that describes this subtype.
-   * @type {object}
-   */
-  static metadata = Object.freeze({
-    type: "base"
-  });
-
-  /* -------------------------------------------------- */
-
   /** @inheritdoc */
   static defineSchema() {
     return { };

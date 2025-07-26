@@ -1,3 +1,9 @@
-import ChessData from "./chess.mjs";
+import ChessModel from "./chess.mjs";
+import GameTokenModel from "./game-token.mjs";
 
-export {ChessData};
+const config = {
+  chess: ChessModel,
+  token: GameTokenModel
+};
+
+export {ChessModel, GameTokenModel, config};

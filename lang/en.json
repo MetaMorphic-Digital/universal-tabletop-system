@@ -47,7 +47,8 @@
   },
   "TYPES": {
     "Actor": {
-      "chess": "Chess Piece"
+      "chess": "Chess Piece",
+      "token": "Game Token"
     },
     "Combatant": {
       "player": "Player"

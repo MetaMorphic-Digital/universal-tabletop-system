@@ -7,9 +7,6 @@ const {api, sheets} = foundry.applications;
  * Extend the basic ItemSheet with some very simple modifications
  */
 export class UTSItemSheet extends api.HandlebarsApplicationMixin(sheets.ItemSheet) {
-
-  /* -------------------------------------------------- */
-
   /** @inheritdoc */
   static DEFAULT_OPTIONS = {
     position: {
