@@ -1,12 +1,14 @@
-<section class="sheet-header flexrow">
+<header class="sheet-header flexrow">
   <img
     class="profile-img"
     src="{{item.img}}"
+    {{#if editable}}
     data-action="editImage"
     data-edit="img"
+    {{/if}}
     data-tooltip="{{item.name}}"
     height="100" width="100"
-    alt="{{item.img}}"
+    alt="{{item.name}}"
   >
   {{formInput itemFields.name value=item.name}}
-</section>
+</header>
