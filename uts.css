@@ -11,6 +11,7 @@
     img {
       border: none;
       flex: 0 0 100px;
+      object-fit: contain;
     }
     input[name="name"] {
       height: 2.5em;
