@@ -47,7 +47,8 @@
   },
   "TYPES": {
     "Actor": {
-      "chess": "Schachfigur"
+      "chess": "Schachfigur",
+      "token": "Spielstein"
     },
     "Combatant": {
       "player": "Spieler"
