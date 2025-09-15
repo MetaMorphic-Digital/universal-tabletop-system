@@ -16,13 +16,13 @@ export default class GameTokenModel extends foundry.abstract.TypeDataModel {
 
   /* -------------------------------------------------- */
 
+  /** @inheritdoc */
   async _preCreate(data, options, user) {
-    this.parent.updateSource({
-      prototypeToken: {
-        bar1: {
-          attribute: "count"
-        }
-      }
-    });
+    const allowed = await super._preCreate(data, options, user);
+    if (allowed === false) return false;
+
+    if (!foundry.utils.hasProperty(data, "prototypeToken.bar1.attribute")) {
+      this.parent.updateSource({"prototypeToken.bar1.attribute": "count"});
+    }
   }
 }
