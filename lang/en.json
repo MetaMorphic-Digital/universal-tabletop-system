@@ -15,6 +15,13 @@
         }
       }
     },
+    "GameToken": {
+      "FIELDS": {
+        "count": {
+          "label": "Count"
+        }
+      }
+    },
     "Sheets": {
       "Labels": {
         "ActorSheet": "Default UTS Actor Sheet",
