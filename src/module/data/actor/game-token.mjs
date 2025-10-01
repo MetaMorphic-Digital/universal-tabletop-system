@@ -9,8 +9,13 @@ export default class GameTokenModel extends foundry.abstract.TypeDataModel {
 
   /** @inheritdoc */
   static defineSchema() {
+    const {SchemaField, NumberField} = foundry.data.fields;
     return {
-      count: new foundry.data.fields.NumberField()
+      count: new NumberField(),
+      resource: new SchemaField({
+        value: new NumberField(),
+        max: new NumberField()
+      })
     };
   }
 

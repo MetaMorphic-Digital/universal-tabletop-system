@@ -19,6 +19,15 @@
       "FIELDS": {
         "count": {
           "label": "Count"
+        },
+        "resource": {
+          "label": "Resource",
+          "value": {
+            "label": "Value"
+          },
+          "max": {
+            "label": "Max"
+          }
         }
       }
     },
