@@ -1,6 +1,7 @@
-## 1.1.3
+## 1.2.0
 
 - Added "Resource" property to game tokens, which includes a max & current value for a bar.
+- Removed assumptions about AE behavior in anticipation of v14 updates.
 
 ## 1.1.2
 

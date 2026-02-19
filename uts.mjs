@@ -12,7 +12,6 @@ Hooks.once("init", () => {
     CONFIG[docCls.documentName].documentClass = docCls;
   }
 
-  Object.assign(CONFIG.ActiveEffect.dataModels, dataModels.ActiveEffect.config);
   Object.assign(CONFIG.Actor.dataModels, dataModels.Actor.config);
   Object.assign(CONFIG.Combatant.dataModels, dataModels.Combatant.config);
 
