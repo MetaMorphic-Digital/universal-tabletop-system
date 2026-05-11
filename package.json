@@ -6,7 +6,9 @@
   "scripts": {
     "build": "rollup -c",
     "createSymlinks": "node ./tools/create-symlinks.mjs",
-    "postinstall": "npm run createSymlinks"
+    "postinstall": "npm run createSymlinks",
+    "lint": "eslint uts.mjs src/module/**/* templates/**/*",
+    "lint:fix": "eslint --fix uts.mjs src/module/**/* templates/**/*"
   },
   "repository": {
     "type": "git",
@@ -22,8 +24,13 @@
   },
   "homepage": "https://github.com/MetaMorphic-Digital/universal-tabletop-system#readme",
   "devDependencies": {
+    "@eslint/js": "^9.27.0",
+    "@html-eslint/eslint-plugin": "^0.26.0",
+    "@html-eslint/parser": "^0.26.0",
+    "@stylistic/eslint-plugin": "^5.5.0",
+    "eslint": "^9.27.0",
+    "eslint-plugin-jsdoc": "^51.4.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
-    "eslint": "^8.57.0",
     "rollup": "^4.9.1"
   }
 }

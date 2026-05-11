@@ -27,7 +27,7 @@
   "version": "AUTOMATIC",
   "compatibility": {
     "minimum": "13.351",
-    "verified": "14.354"
+    "verified": "14"
   },
   "esmodules": ["uts.mjs"],
   "styles": ["uts.css"],
@@ -62,10 +62,6 @@
       "token": {},
       "chess": {}
     },
-    "Item": {},
-    "Card": {},
-    "Cards": {},
-    "Combat": {},
     "Combatant": {
       "player": {}
     }
