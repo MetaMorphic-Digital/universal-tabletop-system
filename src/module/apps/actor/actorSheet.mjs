@@ -1,10 +1,10 @@
-import {systemPath} from "../../constants.mjs";
-import {prepareActiveEffectCategories} from "../../helpers/utils.mjs";
+import { prepareActiveEffectCategories } from "../../helpers/utils.mjs";
+import { systemPath } from "../../constants.mjs";
 
-const {api, sheets} = foundry.applications;
+const { api, sheets } = foundry.applications;
 
 /**
- * Extend the basic ActorSheet with some very simple modifications
+ * Extend the basic ActorSheet with some very simple modifications.
  */
 export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSheet) {
   /** @inheritdoc */
@@ -12,17 +12,17 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
     classes: ["uts", "actor", "standard-form"],
     position: {
       width: 600,
-      height: 600
+      height: 600,
     },
     actions: {
       viewDoc: this.#viewDoc,
       createDoc: this.#createDoc,
       deleteDoc: this.#deleteDoc,
-      toggleEffect: this.#toggleEffect
+      toggleEffect: this.#toggleEffect,
     },
     form: {
-      submitOnChange: true
-    }
+      submitOnChange: true,
+    },
   };
 
   /* -------------------------------------------------- */
@@ -31,18 +31,18 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
     primary: {
       tabs: [
         {
-          id: "properties"
+          id: "properties",
         },
         {
-          id: "items"
+          id: "items",
         },
         {
-          id: "effects"
-        }
+          id: "effects",
+        },
       ],
       initial: "properties",
-      labelPrefix: "UTS.Sheets.Tabs"
-    }
+      labelPrefix: "UTS.Sheets.Tabs",
+    },
   };
 
   /* -------------------------------------------------- */
@@ -50,23 +50,23 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
   /** @inheritdoc */
   static PARTS = {
     header: {
-      template: systemPath("templates/actor/header.hbs")
+      template: systemPath("templates/actor/header.hbs"),
     },
     tabs: {
-      template: "templates/generic/tab-navigation.hbs"
+      template: "templates/generic/tab-navigation.hbs",
     },
     properties: {
       template: systemPath("templates/shared/properties.hbs"),
-      scrollable: [""]
+      scrollable: [""],
     },
     items: {
       template: systemPath("templates/actor/items.hbs"),
-      scrollable: [""]
+      scrollable: [""],
     },
     effects: {
       template: systemPath("templates/shared/effects.hbs"),
-      scrollable: [""]
-    }
+      scrollable: [""],
+    },
   };
 
   /* -------------------------------------------------- */
@@ -93,7 +93,7 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
       system: this.actor.system,
       flags: this.actor.flags,
       actorFields: this.actor.schema.fields,
-      config: CONFIG
+      config: CONFIG,
     });
 
     return context;
@@ -123,7 +123,7 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
   /* -------------------------------------------------- */
 
   /**
-   * Handles the system fields for the form-fields generic
+   * Handles the system fields for the form-fields generic.
    * @returns {object[]}
    */
   async _getFields() {
@@ -135,11 +135,11 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
     for (const field of Object.values(systemFields ?? {})) {
       const path = `system.${field.name}`;
       if (field instanceof foundry.data.fields.SchemaField) {
-        const fieldset = {fieldset: true, legend: field.label, fields: []};
+        const fieldset = { fieldset: true, legend: field.label, fields: [] };
         await this.#addSystemFields(fieldset, field.fields, source, path);
         fieldSets.push(fieldset);
       } else {
-        fieldSets.push({outer: {field, value: foundry.utils.getProperty(source, path)}});
+        fieldSets.push({ outer: { field, value: foundry.utils.getProperty(source, path) } });
       }
     }
     return fieldSets;
@@ -156,7 +156,7 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
       if (field instanceof foundry.data.fields.SchemaField) {
         this.#addSystemFields(fieldset, field.fields, source, path);
       } else if (field.constructor.hasFormSupport) {
-        fieldset.fields.push({field, value: foundry.utils.getProperty(source, path)});
+        fieldset.fields.push({ field, value: foundry.utils.getProperty(source, path) });
       }
     }
   }
@@ -164,11 +164,11 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
   /* -------------------------------------------------- */
 
   /**
-   * Adapted from Actor#itemTypes
+   * Adapted from Actor#itemTypes.
    */
   _getItems() {
     const types = Object.fromEntries(game.documentTypes.Item.map((t) => {
-      return [t, {label: game.i18n.localize(CONFIG.Item.typeLabels[t]), items: []}];
+      return [t, { label: game.i18n.localize(CONFIG.Item.typeLabels[t]), items: [] }];
     }));
     for (const item of this.actor.items) {
       types[item.type].items.push(item);
@@ -183,8 +183,8 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
   /**
    * Actions performed after any render of the Application.
    * Post-render steps are not awaited by the render process.
-   * @param {ApplicationRenderContext} context      Prepared context data
-   * @param {RenderOptions} options                 Provided render options
+   * @param {ApplicationRenderContext} context      Prepared context data.
+   * @param {RenderOptions} options                 Provided render options.
    * @protected
    * @inheritdoc
    */
@@ -198,11 +198,11 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
   /* -------------------------------------------------- */
 
   /**
-   * Renders an embedded document's sheet
+   * Renders an embedded document's sheet.
    *
    * @this UTSActorSheet
-   * @param {PointerEvent} event   The originating click event
-   * @param {HTMLElement} target   The capturing HTML element which defined a [data-action]
+   * @param {PointerEvent} event   The originating click event.
+   * @param {HTMLElement} target   The capturing HTML element which defined a [data-action].
    * @protected
    */
   static async #viewDoc(event, target) {
@@ -213,11 +213,11 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
   /* -------------------------------------------------- */
 
   /**
-   * Handles item deletion
+   * Handles item deletion.
    *
    * @this UTSActorSheet
-   * @param {PointerEvent} event   The originating click event
-   * @param {HTMLElement} target   The capturing HTML element which defined a [data-action]
+   * @param {PointerEvent} event   The originating click event.
+   * @param {HTMLElement} target   The capturing HTML element which defined a [data-action].
    * @protected
    */
   static async #deleteDoc(event, target) {
@@ -228,11 +228,11 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
   /* -------------------------------------------------- */
 
   /**
-   * Handle creating a new Owned Item or ActiveEffect for the actor using initial data defined in the HTML dataset
+   * Handle creating a new Owned Item or ActiveEffect for the actor using initial data defined in the HTML dataset.
    *
    * @this UTSActorSheet
-   * @param {PointerEvent} event   The originating click event
-   * @param {HTMLElement} target   The capturing HTML element which defined a [data-action]
+   * @param {PointerEvent} event   The originating click event.
+   * @param {HTMLElement} target   The capturing HTML element which defined a [data-action].
    * @private
    */
   static async #createDoc(event, target) {
@@ -240,29 +240,29 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
     const docData = {
       name: docCls.defaultName({
         type: target.dataset.type,
-        parent: this.actor
-      })
+        parent: this.actor,
+      }),
     };
     for (const [dataKey, value] of Object.entries(target.dataset)) {
       if (["action", "documentClass"].includes(dataKey)) continue;
       foundry.utils.setProperty(docData, dataKey, value);
     }
-    docCls.create(docData, {parent: this.actor});
+    docCls.create(docData, { parent: this.actor });
   }
 
   /* -------------------------------------------------- */
 
   /**
-   * Determines effect parent to pass to helper
+   * Determines effect parent to pass to helper.
    *
    * @this UTSActorSheet
-   * @param {PointerEvent} event   The originating click event
-   * @param {HTMLElement} target   The capturing HTML element which defined a [data-action]
+   * @param {PointerEvent} event   The originating click event.
+   * @param {HTMLElement} target   The capturing HTML element which defined a [data-action].
    * @private
    */
   static async #toggleEffect(event, target) {
     const effect = this._getEmbeddedDocument(target);
-    effect.update({disabled: !effect.disabled});
+    effect.update({ disabled: !effect.disabled });
   }
 
   /* -------------------------------------------------- */
@@ -270,10 +270,10 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
   /* -------------------------------------------------- */
 
   /**
-   * Fetches the embedded document representing the containing HTML element
+   * Fetches the embedded document representing the containing HTML element.
    *
-   * @param {HTMLElement} target      The element subject to search
-   * @returns {Item|ActiveEffect}     The embedded Item or ActiveEffect
+   * @param {HTMLElement} target      The element subject to search.
+   * @returns {Item|ActiveEffect}     The embedded Item or ActiveEffect.
    */
   _getEmbeddedDocument(target) {
     const docRow = target.closest("li[data-document-class]");
@@ -295,9 +295,9 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
 
   /**
    * Submit a document update based on the processed form data.
-   * @param {SubmitEvent} event                   The originating form submission event
-   * @param {HTMLFormElement} form                The form element that was submitted
-   * @param {object} submitData                   Processed and validated form data to be used for a document update
+   * @param {SubmitEvent} event                   The originating form submission event.
+   * @param {HTMLFormElement} form                The form element that was submitted.
+   * @param {object} submitData                   Processed and validated form data to be used for a document update.
    * @returns {Promise<void>}
    * @protected
    * @inheritdoc
@@ -311,7 +311,7 @@ export class UTSActorSheet extends api.HandlebarsApplicationMixin(sheets.ActorSh
   /* -------------------------------------------------- */
 
   /**
-   * Disables inputs subject to active effects
+   * Disables inputs subject to active effects.
    */
   #disableOverrides() {
     const flatOverrides = foundry.utils.flattenObject(this.actor.overrides);

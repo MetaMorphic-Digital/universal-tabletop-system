@@ -1,5 +1,5 @@
 /**
- * Simple data model for chess pieces as a type of actor
+ * Simple data model for chess pieces as a type of actor.
  */
 export default class ChessModel extends foundry.abstract.TypeDataModel {
   /** @inheritdoc */
@@ -13,8 +13,8 @@ export default class ChessModel extends foundry.abstract.TypeDataModel {
       piece: new foundry.data.fields.StringField({
         required: true,
         choices: CONFIG.UTS.chess.pieces,
-        initial: "pawn"
-      })
+        initial: "pawn",
+      }),
     };
   }
 }

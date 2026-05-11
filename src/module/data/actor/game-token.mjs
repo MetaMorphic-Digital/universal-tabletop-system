@@ -1,5 +1,5 @@
 /**
- * Simple data model for game tokens as a type of actor
+ * Simple data model for game tokens as a type of actor.
  */
 export default class GameTokenModel extends foundry.abstract.TypeDataModel {
   /** @inheritdoc */
@@ -9,13 +9,13 @@ export default class GameTokenModel extends foundry.abstract.TypeDataModel {
 
   /** @inheritdoc */
   static defineSchema() {
-    const {SchemaField, NumberField} = foundry.data.fields;
+    const { SchemaField, NumberField } = foundry.data.fields;
     return {
       count: new NumberField(),
       resource: new SchemaField({
         value: new NumberField(),
-        max: new NumberField()
-      })
+        max: new NumberField(),
+      }),
     };
   }
 
@@ -27,7 +27,7 @@ export default class GameTokenModel extends foundry.abstract.TypeDataModel {
     if (allowed === false) return false;
 
     if (!foundry.utils.hasProperty(data, "prototypeToken.bar1.attribute")) {
-      this.parent.updateSource({"prototypeToken.bar1.attribute": "count"});
+      this.parent.updateSource({ "prototypeToken.bar1.attribute": "count" });
     }
   }
 }

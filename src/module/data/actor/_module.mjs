@@ -3,7 +3,7 @@ import GameTokenModel from "./game-token.mjs";
 
 const config = {
   chess: ChessModel,
-  token: GameTokenModel
+  token: GameTokenModel,
 };
 
-export {ChessModel, GameTokenModel, config};
+export { ChessModel, GameTokenModel, config };

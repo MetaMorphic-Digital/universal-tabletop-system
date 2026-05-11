@@ -1,8 +1,8 @@
-import UTS from "./src/module/config.mjs";
 import * as apps from "./src/module/apps/_module.mjs";
-import * as documents from "./src/module/documents/_module.mjs";
 import * as dataModels from "./src/module/data/_module.mjs";
-import {localizeHelper} from "./src/module/helpers/utils.mjs";
+import * as documents from "./src/module/documents/_module.mjs";
+import UTS from "./src/module/config.mjs";
+import { localizeHelper } from "./src/module/helpers/utils.mjs";
 
 Hooks.once("init", () => {
   CONFIG.UTS = UTS;
@@ -19,10 +19,10 @@ Hooks.once("init", () => {
 
   // Document Sheets
   foundry.documents.collections.Actors.registerSheet("uts", apps.Actor.UTSActorSheet, {
-    makeDefault: true, label: "UTS.Sheets.Labels.ActorSheet"
+    makeDefault: true, label: "UTS.Sheets.Labels.ActorSheet",
   });
   foundry.documents.collections.Items.registerSheet("uts", apps.Item.UTSItemSheet, {
-    makeDefault: true, label: "UTS.Sheets.Labels.ActorSheet"
+    makeDefault: true, label: "UTS.Sheets.Labels.ActorSheet",
   });
 
   // Sidebar tabs

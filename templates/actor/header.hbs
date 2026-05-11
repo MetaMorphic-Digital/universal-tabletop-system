@@ -2,13 +2,13 @@
   <img
     class="profile-img"
     src="{{actor.img}}"
+    alt="{{actor.name}}"
     {{#if editable}}
     data-action="editImage"
     data-edit="img"
     {{/if}}
     data-tooltip="{{actor.name}}"
     height="100" width="100"
-    alt="{{actor.name}}"
   >
   {{formInput actorFields.name value=actor.name}}
 </header>

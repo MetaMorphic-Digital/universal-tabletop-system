@@ -13,12 +13,13 @@
       <div class="document-controls flexrow">
         <a class="effect-controls"
           data-action="createDoc" data-document-class="ActiveEffect"
+          {{!-- <!-- eslint-disable-next-line @html-eslint/no-duplicate-attrs --> --}}
           {{#if (eq section.type "inactive" )}} data-disabled="true"
           {{else if (eq section.type "temporary" )}} data-duration.rounds="1" {{/if}}
           data-origin="{{@root.document.uuid}}"
           title="{{localize 'DOCUMENT.Create' type=(localize 'DOCUMENT.ActiveEffect')}}"
           data-img="icons/svg/aura.svg"
-        >
+          >
           <i class="fas fa-plus"></i>
           {{localize "DOCUMENT.New" type=(localize "UTS.Effect.Label")}}
         </a>
@@ -30,7 +31,7 @@
       <li class="effect flexrow draggable" data-effect-id="{{effect.id}}" data-parent-id="{{effect.parent.id}}"
         data-document-class="ActiveEffect">
         <div class="effect-label flexrow">
-          <img class="effect-image" src="{{effect.img}}" height="24" width="24">
+          <img class="effect-image" src="{{effect.img}}" alt="{{effect.name}}" height="24" width="24">
           <div class="effect-name">{{effect.name}}</div>
         </div>
         <div class="effect-source">{{effect.sourceName}}</div>

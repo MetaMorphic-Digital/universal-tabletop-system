@@ -8,7 +8,6 @@ import jsdoc from "eslint-plugin-jsdoc";
 import parser from "@html-eslint/parser";
 import path from "node:path";
 import stylistic from "@stylistic/eslint-plugin";
-import tseslint from "typescript-eslint";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -141,20 +140,6 @@ export default defineConfig([
       }],
 
       "@html-eslint/indent": ["error", 2],
-    },
-  },
-  {
-    files: ["**/*.ts"],
-    extends: [js.configs.recommended, tseslint.configs.recommended],
-
-    plugins: {
-      "@stylistic": stylistic,
-    },
-
-    rules: {
-      "@stylistic/space-in-parens": ["error", "never"],
-      "@stylistic/key-spacing": "error",
-      "@stylistic/type-generic-spacing": "error",
     },
   },
 ]);

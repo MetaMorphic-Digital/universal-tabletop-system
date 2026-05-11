@@ -1,5 +1,5 @@
 /**
- * A simple extension that adds a hook at the end of data prep
+ * A simple extension that adds a hook at the end of data prep.
  */
 export default class UTSCards extends foundry.documents.Cards {
   /** @inheritdoc */

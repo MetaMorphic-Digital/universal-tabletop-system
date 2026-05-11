@@ -1,7 +1,7 @@
 import Player from "./player.mjs";
 
 const config = {
-  player: Player
+  player: Player,
 };
 
-export {Player, config};
+export { Player, config };
