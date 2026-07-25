@@ -22,7 +22,7 @@ Hooks.once("init", () => {
     makeDefault: true, label: "UTS.Sheets.Labels.ActorSheet",
   });
   foundry.documents.collections.Items.registerSheet("uts", apps.Item.UTSItemSheet, {
-    makeDefault: true, label: "UTS.Sheets.Labels.ActorSheet",
+    makeDefault: true, label: "UTS.Sheets.Labels.ItemSheet",
   });
 
   // Sidebar tabs
